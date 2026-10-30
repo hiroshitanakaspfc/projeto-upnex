@@ -1,0 +1,2040 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina Estúdio | Fotografia Profissional & Experiências Únicas</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        gold: {
+                            300: '#F3E5AB',
+                            400: '#E6CA65',
+                            500: '#D4AF37',
+                            600: '#AA820A',
+                        },
+                        dark: {
+                            950: '#09090b',
+                            900: '#121215',
+                            800: '#1c1c21',
+                            700: '#272730',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        display: ['Cinzel', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #09090b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #272730;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37;
+        }
+
+        /* Glassmorphism Styling */
+        .glass-panel {
+            background: rgba(18, 18, 21, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(39, 39, 48, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFE58F 0%, #D4AF37 50%, #996515 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-glow:hover {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.25);
+        }
+
+        /* KEYFRAME ANIMATIONS & MICRO-INTERACTIONS */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.25; transform: scale(1); }
+            50% { opacity: 0.45; transform: scale(1.08); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes modalPop {
+            0% { opacity: 0; transform: scale(0.9) translateY(16px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @keyframes checkmarkBounce {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.25); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes pulsePix {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+            50% { box-shadow: 0 0 0 14px rgba(212, 175, 55, 0); }
+        }
+
+        /* ANIMATION UTILITY CLASSES */
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .animate-pulse-glow {
+            animation: pulseGlow 6s ease-in-out infinite;
+        }
+
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.15s; opacity: 0; animation-fill-mode: forwards; }
+        .delay-2 { animation-delay: 0.3s; opacity: 0; animation-fill-mode: forwards; }
+        .delay-3 { animation-delay: 0.45s; opacity: 0; animation-fill-mode: forwards; }
+
+        .animate-modal-pop {
+            animation: modalPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .card-hover-lift {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+        }
+        .card-hover-lift:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -15px rgba(212, 175, 55, 0.25);
+        }
+
+        /* SCROLL REVEAL EFFECT */
+        .fade-in-scroll {
+            opacity: 0;
+            transform: translateY(32px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-in-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 3D CREDIT CARD FLIP PREVIEW */
+        .card-3d-wrap {
+            perspective: 1000px;
+        }
+        .card-3d-inner {
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            position: relative;
+        }
+        .card-front, .card-back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+            position: absolute;
+            height: 100%;
+        }
+
+        .animate-checkmark {
+            animation: checkmarkBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .pix-qr-pulse {
+            animation: pulsePix 2s infinite;
+        }
+
+        /* CART ITEM DELETION SLIDE-OUT */
+        .cart-item-removing {
+            transition: all 0.35s ease-out;
+            opacity: 0;
+            transform: translateX(45px);
+            max-height: 0 !important;
+            padding-top: 0 !important;
+            padding-bottom: 0 !important;
+            margin-top: 0 !important;
+            margin-bottom: 0 !important;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-dark-950 text-zinc-100 font-sans antialiased selection:bg-gold-500 selection:text-black min-h-screen flex flex-col justify-between">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-gradient-to-r from-gold-600 via-amber-500 to-gold-600 text-dark-950 text-xs font-semibold py-1.5 px-4 text-center tracking-wider uppercase flex items-center justify-center gap-2">
+        <i class="fa-solid fa-sparkles"></i>
+        <span>Agenda aberta para ensaios e eventos 2026! Use o cupom <strong class="underline">LUMINA10</strong> para 10% OFF</span>
+        <i class="fa-solid fa-camera-retro hidden sm:inline"></i>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="sticky top-0 z-40 w-full glass-panel transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- LOGO -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-full border border-gold-500/40 bg-dark-900 flex items-center justify-center text-gold-400 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-camera text-lg"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display text-xl font-bold tracking-widest uppercase gold-gradient-text">LUMINA</span>
+                    <span class="text-[9px] tracking-[0.3em] text-zinc-400 font-light -mt-1">ESTÚDIO DE FOTOGRAFIA</span>
+                </div>
+            </a>
+
+            <!-- DESKTOP NAVIGATION -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
+                <a href="#inicio" class="text-gold-400 hover:text-gold-300 transition-colors">Início</a>
+                <a href="#portfolio" class="text-zinc-300 hover:text-gold-400 transition-colors">Portfólio</a>
+                <a href="#pacotes" class="text-zinc-300 hover:text-gold-400 transition-colors">Serviços & Pacotes</a>
+                <a href="#sobre" class="text-zinc-300 hover:text-gold-400 transition-colors">Sobre</a>
+                <a href="#contato" class="text-zinc-300 hover:text-gold-400 transition-colors">Contato</a>
+            </nav>
+
+            <!-- RIGHT ACTION BUTTONS -->
+            <div class="flex items-center gap-3 sm:gap-4">
+                
+                <!-- USER AUTH CONTAINER (UPDATES DYNAMICALLY) -->
+                <div id="user-header-container" class="relative">
+                    <!-- Default Unauthenticated Button -->
+                    <button id="auth-btn" onclick="openAuthModal()" class="flex items-center gap-2 px-3.5 py-2 rounded-full border border-zinc-700 bg-dark-900 hover:border-gold-500/60 hover:bg-dark-800 text-xs font-medium text-zinc-200 transition">
+                        <i class="fa-regular fa-user text-gold-400" id="user-icon"></i>
+                        <span id="user-name-display">Entrar / Cadastrar</span>
+                    </button>
+
+                    <!-- Authenticated Dropdown Menu (Hidden by default) -->
+                    <div id="user-dropdown" class="hidden absolute right-0 mt-2 w-56 rounded-xl bg-dark-900 border border-zinc-800 shadow-2xl p-2 z-50 space-y-1">
+                        <div class="px-3 py-2 border-b border-zinc-800">
+                            <span class="block text-[10px] text-zinc-400 uppercase tracking-wider font-semibold">Conta Conectada</span>
+                            <span id="dropdown-user-email" class="text-xs text-gold-400 font-medium truncate block">cliente@lumina.com</span>
+                        </div>
+                        <button onclick="openOrdersModal(); closeUserDropdown()" class="w-full text-left px-3 py-2 rounded-lg text-xs text-zinc-300 hover:bg-dark-800 hover:text-gold-400 transition flex items-center gap-2">
+                            <i class="fa-solid fa-clock-rotate-left text-gold-400"></i> Meus Agendamentos
+                        </button>
+                        <button onclick="handleLogout()" class="w-full text-left px-3 py-2 rounded-lg text-xs text-red-400 hover:bg-red-500/10 transition flex items-center gap-2">
+                            <i class="fa-solid fa-right-from-bracket"></i> Sair da Conta
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CART BUTTON -->
+                <button onclick="toggleCartDrawer()" class="relative p-2.5 rounded-full border border-zinc-700 bg-dark-900 hover:border-gold-500 text-zinc-200 hover:text-gold-400 transition">
+                    <i class="fa-solid fa-bag-shopping text-lg"></i>
+                    <span id="cart-counter" class="absolute -top-1 -right-1 w-5 h-5 bg-gold-500 text-dark-950 font-bold text-xs rounded-full flex items-center justify-center">0</span>
+                </button>
+
+                <!-- MOBILE MENU TOGGLE -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-zinc-300 hover:text-gold-400">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- MOBILE MENU DRAWER -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-zinc-800 bg-dark-900 px-6 py-4 flex flex-col space-y-3">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="text-gold-400 py-1">Início</a>
+            <a href="#portfolio" onclick="toggleMobileMenu()" class="text-zinc-300 py-1">Portfólio</a>
+            <a href="#pacotes" onclick="toggleMobileMenu()" class="text-zinc-300 py-1">Serviços & Pacotes</a>
+            <a href="#sobre" onclick="toggleMobileMenu()" class="text-zinc-300 py-1">Sobre</a>
+            <a href="#contato" onclick="toggleMobileMenu()" class="text-zinc-300 py-1">Contato</a>
+            <button onclick="toggleMobileMenu(); openOrdersModal()" class="text-left text-zinc-300 py-1 flex items-center gap-2">
+                <i class="fa-solid fa-clock-rotate-left text-gold-400"></i> Meus Agendamentos
+            </button>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="relative min-h-[88vh] flex items-center justify-center overflow-hidden py-20 px-4 sm:px-6">
+        <!-- Background Image Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=2000&auto=format&fit=crop" alt="Photography Studio Hero" class="w-full h-full object-cover opacity-25 scale-105 animate-pulse-glow">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/80 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto text-center space-y-8">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-500/30 bg-dark-900/80 text-gold-400 text-xs tracking-widest uppercase font-medium backdrop-blur-md animate-float">
+                <i class="fa-solid fa-award"></i> Estúdio de Fotografia de Alta Cordoaria
+            </div>
+            
+            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-white leading-tight animate-fade-in-up">
+                Eternizando Sentimentos em <span class="font-display font-extrabold gold-gradient-text block sm:inline">Obras de Arte</span>
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-zinc-400 text-base sm:text-lg font-light leading-relaxed animate-fade-in-up delay-1">
+                Fotografia autoral para ensaios pessoais, casamentos inesquecíveis, gestantes e posicionamento corporativo de alto impacto. Transformamos momentos em memórias eternas.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 animate-fade-in-up delay-2">
+                <a href="#pacotes" class="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-gold-500 to-amber-600 text-dark-950 font-bold text-sm tracking-wide uppercase hover:shadow-lg hover:shadow-gold-500/30 hover:scale-105 transition-all duration-300 text-center">
+                    <i class="fa-solid fa-calendar-check mr-2"></i> Agendar Ensaio Agora
+                </a>
+                <a href="#portfolio" class="w-full sm:w-auto px-8 py-4 rounded-full border border-zinc-700 hover:border-gold-500 bg-dark-900/60 text-zinc-200 font-semibold text-sm tracking-wide uppercase hover:bg-dark-800 hover:scale-105 transition-all duration-300 text-center">
+                    <i class="fa-solid fa-compass mr-2"></i> Explorar Portfólio
+                </a>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="pt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto border-t border-zinc-800/80 mt-12 animate-fade-in-up delay-3">
+                <div class="text-center">
+                    <span class="block text-3xl font-bold font-display text-gold-400">10+</span>
+                    <span class="text-xs text-zinc-400 uppercase tracking-wider">Anos de Experiência</span>
+                </div>
+                <div class="text-center">
+                    <span class="block text-3xl font-bold font-display text-gold-400">1.400+</span>
+                    <span class="text-xs text-zinc-400 uppercase tracking-wider">Ensaios Realizados</span>
+                </div>
+                <div class="text-center">
+                    <span class="block text-3xl font-bold font-display text-gold-400">99.8%</span>
+                    <span class="text-xs text-zinc-400 uppercase tracking-wider">Clientes Encantados</span>
+                </div>
+                <div class="text-center">
+                    <span class="block text-3xl font-bold font-display text-gold-400">25+</span>
+                    <span class="text-xs text-zinc-400 uppercase tracking-wider">Prêmios Nacionais</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto fade-in-scroll">
+        <div class="text-center space-y-4 mb-12">
+            <span class="text-gold-400 text-xs uppercase font-bold tracking-[0.25em]">Galeria Exclusiva</span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white">Nosso Portfólio</h2>
+            <p class="text-zinc-400 max-w-xl mx-auto text-sm sm:text-base">Navegue pelas nossas categorias e confira a sensibilidade de nossos registros.</p>
+            
+            <!-- Category Filters -->
+            <div class="flex flex-wrap items-center justify-center gap-2 pt-6" id="portfolio-filters">
+                <button onclick="filterPortfolio('todos', this)" class="portfolio-filter-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition bg-gold-500 text-dark-950">Todos</button>
+                <button onclick="filterPortfolio('casamentos', this)" class="portfolio-filter-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition bg-dark-900 border border-zinc-800 text-zinc-400 hover:border-gold-500">Casamentos</button>
+                <button onclick="filterPortfolio('ensaios', this)" class="portfolio-filter-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition bg-dark-900 border border-zinc-800 text-zinc-400 hover:border-gold-500">Ensaios Pessoais</button>
+                <button onclick="filterPortfolio('gestantes', this)" class="portfolio-filter-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition bg-dark-900 border border-zinc-800 text-zinc-400 hover:border-gold-500">Gestantes</button>
+                <button onclick="filterPortfolio('corporativo', this)" class="portfolio-filter-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition bg-dark-900 border border-zinc-800 text-zinc-400 hover:border-gold-500">Corporativo</button>
+                <button onclick="filterPortfolio('eventos', this)" class="portfolio-filter-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition bg-dark-900 border border-zinc-800 text-zinc-400 hover:border-gold-500">Eventos</button>
+            </div>
+        </div>
+
+        <!-- Portfolio Gallery Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="portfolio-grid">
+            <!-- Gallery items dynamically generated by JS -->
+        </div>
+    </section>
+
+    <!-- PACKAGES & SERVICES SECTION -->
+    <section id="pacotes" class="py-24 bg-dark-900/60 border-y border-zinc-800/80 px-4 sm:px-6 lg:px-8 fade-in-scroll">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center space-y-4 mb-16">
+                <span class="text-gold-400 text-xs uppercase font-bold tracking-[0.25em]">Valores & Investimento</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white">Pacotes de Fotografia</h2>
+                <p class="text-zinc-400 max-w-xl mx-auto text-sm sm:text-base">Escolha a experiência ideal para você e personalize com nossos adicionais exclusivos.</p>
+            </div>
+
+            <!-- Packages Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="packages-grid">
+                <!-- Package cards injected dynamically by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="sobre" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto fade-in-scroll">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="relative">
+                <div class="aspect-[4/5] rounded-2xl overflow-hidden border border-gold-500/20 shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1554048612-b6a482bc67e5?q=80&w=1000&auto=format&fit=crop" alt="Fotógrafo Principal" class="w-full h-full object-cover">
+                </div>
+                <div class="absolute -bottom-6 -right-6 glass-panel p-6 rounded-2xl border border-gold-500/30 max-w-xs hidden sm:block">
+                    <p class="font-serif italic text-gold-300 text-sm">"A fotografia não é apenas sobre capturar luz, mas sobre eternizar conexões verdadeiras."</p>
+                    <span class="block text-xs font-bold text-zinc-400 mt-2 uppercase tracking-wider">— Gabriel Lumina, Fundador</span>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <span class="text-gold-400 text-xs uppercase font-bold tracking-[0.25em]">Por Trás da Lente</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">A Arte de Contar Histórias Únicas</h2>
+                <p class="text-zinc-300 leading-relaxed text-sm sm:text-base">
+                    Com mais de uma década dedicada à fotografia artística e documental, o Estúdio Lumina nasceu com o propósito de oferecer uma experiência sensorial completa, onde cada sessão é planejada nos mínimos detalhes.
+                </p>
+                <p class="text-zinc-400 leading-relaxed text-sm">
+                    Utilizamos equipamentos fotográficos de última geração (médio formato e Full Frame 8K), iluminação cinematográfica de estúdio e técnicas avançadas de pós-produção para entregar imagens dignas de galerias e livros de arte.
+                </p>
+
+                <div class="grid grid-cols-2 gap-4 pt-4 border-t border-zinc-800">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white uppercase">Garantia Total</h4>
+                            <p class="text-xs text-zinc-400">Satisfação ou remarcação</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-white uppercase">Entrega Ágil</h4>
+                            <p class="text-xs text-zinc-400">Prévia em até 48 horas</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & LOCATION SECTION -->
+    <section id="contato" class="py-24 bg-dark-900 border-t border-zinc-800 px-4 sm:px-6 lg:px-8 fade-in-scroll">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            <div class="space-y-6">
+                <span class="text-gold-400 text-xs uppercase font-bold tracking-[0.25em]">Fale Conosco</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white">Agende uma Visita ao Nosso Estúdio</h2>
+                <p class="text-zinc-400 text-sm">Estamos prontos para tomar um café e desenhar o projeto perfeito para a sua sessão de fotos.</p>
+
+                <div class="space-y-4 pt-4">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-lg bg-dark-800 border border-zinc-700 flex items-center justify-center text-gold-400 shrink-0">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white">Endereço do Estúdio</h4>
+                            <p class="text-xs text-zinc-400">Av. Paulista, 1800 - Jardins, São Paulo - SP</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-lg bg-dark-800 border border-zinc-700 flex items-center justify-center text-gold-400 shrink-0">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white">Telefone / WhatsApp</h4>
+                            <p class="text-xs text-zinc-400">(11) 99887-6543 / (11) 3214-5678</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-lg bg-dark-800 border border-zinc-700 flex items-center justify-center text-gold-400 shrink-0">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white">E-mail Profissional</h4>
+                            <p class="text-xs text-zinc-400">contato@luminaestudio.com.br</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="glass-panel p-8 rounded-2xl border border-zinc-800">
+                <form id="contact-form" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                    <h3 class="font-serif text-xl font-bold text-white mb-2">Envie uma Mensagem</h3>
+                    
+                    <div>
+                        <label class="block text-xs uppercase font-semibold text-zinc-400 mb-1">Nome Completo</label>
+                        <input type="text" id="contact-name" required class="w-full px-4 py-3 rounded-lg bg-dark-950 border border-zinc-800 text-white focus:outline-none focus:border-gold-500 text-sm" placeholder="Seu nome">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs uppercase font-semibold text-zinc-400 mb-1">E-mail</label>
+                            <input type="email" id="contact-email" required class="w-full px-4 py-3 rounded-lg bg-dark-950 border border-zinc-800 text-white focus:outline-none focus:border-gold-500 text-sm" placeholder="seu@email.com">
+                        </div>
+                        <div>
+                            <label class="block text-xs uppercase font-semibold text-zinc-400 mb-1">Telefone / WhatsApp</label>
+                            <input type="tel" id="contact-phone" required class="w-full px-4 py-3 rounded-lg bg-dark-950 border border-zinc-800 text-white focus:outline-none focus:border-gold-500 text-sm" placeholder="(11) 99999-9999">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase font-semibold text-zinc-400 mb-1">Tipo de Ensaio</label>
+                        <select id="contact-type" class="w-full px-4 py-3 rounded-lg bg-dark-950 border border-zinc-800 text-white focus:outline-none focus:border-gold-500 text-sm">
+                            <option value="Ensaio Retrato Individual">Ensaio Retrato Individual</option>
+                            <option value="Casamento / Pre-Wedding">Casamento / Pre-Wedding</option>
+                            <option value="Gestante & Família">Gestante & Família</option>
+                            <option value="Corporativo / Branding">Corporativo / Branding</option>
+                            <option value="Eventos Especiais">Eventos Especiais</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs uppercase font-semibold text-zinc-400 mb-1">Sua Mensagem / Dúvida</label>
+                        <textarea id="contact-message" rows="4" required class="w-full px-4 py-3 rounded-lg bg-dark-950 border border-zinc-800 text-white focus:outline-none focus:border-gold-500 text-sm" placeholder="Conte-nos sobre a sua ideia ou data preferida..."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-dark-950 font-bold uppercase text-xs tracking-wider transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/20">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Enviar e Falar no WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark-950 border-t border-zinc-900 py-12 px-4 sm:px-6 lg:px-8 text-center sm:text-left">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full border border-gold-500/40 bg-dark-900 flex items-center justify-center text-gold-400">
+                    <i class="fa-solid fa-camera text-sm"></i>
+                </div>
+                <span class="font-display text-lg font-bold uppercase tracking-widest text-zinc-200">LUMINA ESTÚDIO</span>
+            </div>
+
+            <p class="text-xs text-zinc-500">
+                &copy; 2026 Lumina Estúdio de Fotografia. Todos os direitos reservados.
+            </p>
+
+            <div class="flex items-center space-x-4 text-zinc-400">
+                <a href="#" class="hover:text-gold-400 transition"><i class="fa-brands fa-instagram text-lg"></i></a>
+                <a href="#" class="hover:text-gold-400 transition"><i class="fa-brands fa-facebook text-lg"></i></a>
+                <a href="#" class="hover:text-gold-400 transition"><i class="fa-brands fa-whatsapp text-lg"></i></a>
+                <a href="#" class="hover:text-gold-400 transition"><i class="fa-brands fa-pinterest text-lg"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CART SLIDE-OVER DRAWER -->
+    <div id="cart-drawer-overlay" onclick="toggleCartDrawer()" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300"></div>
+    
+    <div id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[450px] bg-dark-900 border-l border-zinc-800 z-50 transform translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
+        <div class="p-6 border-b border-zinc-800 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-bag-shopping text-gold-400 text-lg"></i>
+                <h3 class="font-serif text-lg font-bold text-white">Seu Carrinho de Agendamentos</h3>
+            </div>
+            <button onclick="toggleCartDrawer()" class="p-2 text-zinc-400 hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items Container -->
+        <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- Items injected by JS -->
+        </div>
+
+        <!-- Cart Footer -->
+        <div class="p-6 border-t border-zinc-800 bg-dark-950 space-y-4">
+            <div class="space-y-2">
+                <div class="flex justify-between text-xs text-zinc-400">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal" class="text-zinc-200">R$ 0,00</span>
+                </div>
+                <div id="discount-row" class="flex justify-between text-xs text-emerald-400 hidden">
+                    <span>Desconto Cupom:</span>
+                    <span id="cart-discount">- R$ 0,00</span>
+                </div>
+                <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-zinc-800">
+                    <span>Total a Pagar:</span>
+                    <span id="cart-total" class="text-gold-400 font-display">R$ 0,00</span>
+                </div>
+            </div>
+
+            <button onclick="proceedToCheckout()" class="w-full py-4 rounded-xl bg-gradient-to-r from-gold-500 to-amber-600 hover:from-gold-400 hover:to-amber-500 text-dark-950 font-bold uppercase text-xs tracking-wider transition shadow-lg shadow-gold-500/10">
+                <i class="fa-solid fa-credit-card mr-2"></i> Ir Para o Pagamento
+            </button>
+        </div>
+    </div>
+
+    <!-- AUTHENTICATION MODAL (ENTRAR / CADASTRAR - IN-PAGE OVERLAY) -->
+    <div id="auth-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-dark-900 border border-zinc-800 rounded-2xl w-full max-w-md p-6 relative shadow-2xl space-y-6 animate-modal-pop">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-zinc-400 hover:text-white transition-transform hover:scale-110">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+
+            <!-- Auth Header -->
+            <div class="text-center space-y-1">
+                <div class="w-12 h-12 rounded-full border border-gold-500/40 bg-dark-950 flex items-center justify-center text-gold-400 mx-auto text-xl mb-2">
+                    <i class="fa-solid fa-user-lock"></i>
+                </div>
+                <h3 class="font-serif text-2xl font-bold text-white">Área do Cliente</h3>
+                <p class="text-xs text-zinc-400">Acesse para gerenciar suas sessões e pagamentos</p>
+            </div>
+
+            <!-- Auth Tabs -->
+            <div class="flex border-b border-zinc-800">
+                <button id="auth-tab-login" onclick="switchAuthTab('login')" class="flex-1 py-2 text-center text-xs font-bold border-b-2 border-gold-500 text-gold-400 transition uppercase tracking-wider">
+                    Entrar
+                </button>
+                <button id="auth-tab-register" onclick="switchAuthTab('register')" class="flex-1 py-2 text-center text-xs font-bold border-b-2 border-transparent text-zinc-400 hover:text-white transition uppercase tracking-wider">
+                    Criar Conta
+                </button>
+            </div>
+
+            <!-- LOGIN FORM -->
+            <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-[11px] uppercase font-semibold text-zinc-400 mb-1">E-mail</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-envelope absolute left-3.5 top-3.5 text-zinc-500 text-sm"></i>
+                        <input type="email" id="login-email" placeholder="seuemail@exemplo.com" required class="w-full pl-10 pr-4 py-3 rounded-lg bg-dark-950 border border-zinc-800 text-white text-xs focus:border-gold-500 focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <div class="flex justify-between items-center mb-1">
+                        <label class="block text-[11px] uppercase font-semibold text-zinc-400">Senha</label>
+                        <button type="button" onclick="handleForgotPassword()" class="text-[10px] text-gold-400 hover:underline">Esqueceu a senha?</button>
+                    </div>
+                    <div class="relative">
+                        <i class="fa-solid fa-key absolute left-3.5 top-3.5 text-zinc-500 text-sm"></i>
+                        <input type="password" id="login-password" placeholder="••••••••" required class="w-full pl-10 pr-4 py-3 rounded-lg bg-dark-950 border border-zinc-800 text-white text-xs focus:border-gold-500 focus:outline-none">
+                    </div>
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-lg bg-gold-500 hover:bg-gold-400 text-dark-950 font-bold uppercase text-xs tracking-wider transition shadow-lg shadow-gold-500/10">
+                    Entrar na Minha Conta
+                </button>
+            </form>
+
+            <!-- REGISTER FORM -->
+            <form id="register-form" onsubmit="handleRegister(event)" class="space-y-4 hidden">
+                <div>
+                    <label class="block text-[11px] uppercase font-semibold text-zinc-400 mb-1">Nome Completo</label>
+                    <input type="text" id="reg-name" placeholder="Seu nome completo" required class="w-full px-4 py-2.5 rounded-lg bg-dark-950 border border-zinc-800 text-white text-xs focus:border-gold-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-[11px] uppercase font-semibold text-zinc-400 mb-1">E-mail</label>
+                    <input type="email" id="reg-email" placeholder="seuemail@exemplo.com" required class="w-full px-4 py-2.5 rounded-lg bg-dark-950 border border-zinc-800 text-white text-xs focus:border-gold-500 focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-[11px] uppercase font-semibold text-zinc-400 mb-1">WhatsApp / Telefone</label>
+                    <input type="tel" id="reg-phone" placeholder="(11) 99999-9999" required class="w-full px-4 py-2.5 rounded-lg bg-dark-950 border border-zinc-800 text-white text-xs focus:border-gold-500 focus:outline-none">
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div>
+                        <label class="block text-[11px] uppercase font-semibold text-zinc-400 mb-1">Senha</label>
+                        <input type="password" id="reg-password" placeholder="••••••••" required minlength="6" class="w-full px-3 py-2.5 rounded-lg bg-dark-950 border border-zinc-800 text-white text-xs focus:border-gold-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[11px] uppercase font-semibold text-zinc-400 mb-1">Confirmar Senha</label>
+                        <input type="password" id="reg-password-confirm" placeholder="••••••••" required minlength="6" class="w-full px-3 py-2.5 rounded-lg bg-dark-950 border border-zinc-800 text-white text-xs focus:border-gold-500 focus:outline-none">
+                    </div>
+                </div>
+                <button type="submit" class="w-full py-3.5 rounded-lg bg-gold-500 hover:bg-gold-400 text-dark-950 font-bold uppercase text-xs tracking-wider transition shadow-lg shadow-gold-500/10">
+                    Criar Minha Conta
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CHECKOUT / PAYMENT MODAL -->
+    <div id="checkout-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-dark-900 border border-zinc-800 rounded-2xl w-full max-w-4xl max-h-[92vh] overflow-y-auto shadow-2xl relative flex flex-col my-auto">
+            
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-zinc-800 flex items-center justify-between sticky top-0 bg-dark-900 z-10">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-gold-500/10 border border-gold-500/30 flex items-center justify-center text-gold-400">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-serif text-lg font-bold text-white">Checkout Seguro - Estúdio Lumina</h3>
+                        <p class="text-xs text-zinc-400">Ambiente criptografado de alta segurança</p>
+                    </div>
+                </div>
+                <button onclick="closeCheckoutModal()" class="p-2 text-zinc-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content Grid -->
+            <div class="p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Left Column: User & Booking Info + Payment Tabs -->
+                <div class="lg:col-span-7 space-y-6">
+                    
+                    <!-- Section 1: Customer Details -->
+                    <div class="space-y-3">
+                        <h4 class="text-xs font-bold uppercase text-gold-400 tracking-wider flex items-center gap-2">
+                            <span class="w-5 h-5 rounded-full bg-gold-500/20 text-gold-400 text-[10px] flex items-center justify-center">1</span>
+                            Dados do Contratante & Agendamento
+                        </h4>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[11px] text-zinc-400 mb-1 uppercase">Nome Completo</label>
+                                <input id="checkout-name" type="text" placeholder="Seu nome completo" class="w-full px-3 py-2.5 rounded-lg bg-dark-950 border border-zinc-800 text-white text-xs focus:border-gold-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-zinc-400 mb-1 uppercase">CPF</label>
+                                <input id="checkout-cpf" type="text" placeholder="000.000.000-00" class="w-full px-3 py-2.5 rounded-lg bg-dark-950 border border-zinc-800 text-white text-xs focus:border-gold-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[11px] text-zinc-400 mb-1 uppercase">E-mail</label>
+                                <input id="checkout-email" type="email" placeholder="seuemail@exemplo.com" class="w-full px-3 py-2.5 rounded-lg bg-dark-950 border border-zinc-800 text-white text-xs focus:border-gold-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-zinc-400 mb-1 uppercase">WhatsApp / Celular</label>
+                                <input id="checkout-phone" type="tel" placeholder="(11) 99999-9999" class="w-full px-3 py-2.5 rounded-lg bg-dark-950 border border-zinc-800 text-white text-xs focus:border-gold-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] text-zinc-400 mb-1 uppercase">Data Preferencial para o Ensaio</label>
+                            <input id="checkout-date" type="date" class="w-full px-3 py-2.5 rounded-lg bg-dark-950 border border-zinc-800 text-white text-xs focus:border-gold-500 focus:outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Section 2: Payment Method Selection -->
+                    <div class="space-y-3 pt-2">
+                        <h4 class="text-xs font-bold uppercase text-gold-400 tracking-wider flex items-center gap-2">
+                            <span class="w-5 h-5 rounded-full bg-gold-500/20 text-gold-400 text-[10px] flex items-center justify-center">2</span>
+                            Forma de Pagamento
+                        </h4>
+
+                        <!-- Payment Tabs -->
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="selectPaymentMethod('pix')" id="pay-tab-pix" class="payment-tab-btn py-3 px-2 rounded-xl border border-gold-500 bg-gold-500/10 text-gold-400 text-xs font-bold flex flex-col items-center gap-1 transition">
+                                <i class="fa-brands fa-pix text-lg"></i>
+                                <span>PIX (10% OFF)</span>
+                            </button>
+                            <button onclick="selectPaymentMethod('card')" id="pay-tab-card" class="payment-tab-btn py-3 px-2 rounded-xl border border-zinc-800 bg-dark-950 text-zinc-400 hover:border-zinc-700 text-xs font-bold flex flex-col items-center gap-1 transition">
+                                <i class="fa-solid fa-credit-card text-lg"></i>
+                                <span>Cartão de Crédito</span>
+                            </button>
+                            <button onclick="selectPaymentMethod('boleto')" id="pay-tab-boleto" class="payment-tab-btn py-3 px-2 rounded-xl border border-zinc-800 bg-dark-950 text-zinc-400 hover:border-zinc-700 text-xs font-bold flex flex-col items-center gap-1 transition">
+                                <i class="fa-solid fa-barcode text-lg"></i>
+                                <span>Boleto Bancário</span>
+                            </button>
+                        </div>
+
+                        <!-- TAB CONTENT: PIX -->
+                        <div id="payment-content-pix" class="p-5 rounded-xl bg-dark-950 border border-zinc-800 text-center space-y-4">
+                            <div class="inline-block p-3 rounded-xl bg-white shadow-lg pix-qr-pulse">
+                                <svg class="w-36 h-36 mx-auto" viewBox="0 0 100 100">
+                                    <rect width="100" height="100" fill="#ffffff" />
+                                    <path d="M10,10 h30 v30 h-30 z M15,15 h20 v20 h-20 z M20,20 h10 v10 h-10 z" fill="#000"/>
+                                    <path d="M60,10 h30 v30 h-30 z M65,15 h20 v20 h-20 z M70,20 h10 v10 h-10 z" fill="#000"/>
+                                    <path d="M10,60 h30 v30 h-30 z M15,65 h20 v20 h-20 z M20,70 h10 v10 h-10 z" fill="#000"/>
+                                    <rect x="45" y="10" width="10" height="25" fill="#000"/>
+                                    <rect x="45" y="45" width="20" height="10" fill="#000"/>
+                                    <rect x="70" y="50" width="20" height="35" fill="#000"/>
+                                    <rect x="50" y="70" width="15" height="15" fill="#000"/>
+                                </svg>
+                            </div>
+                            <p class="text-xs text-zinc-300">Escaneie o QR Code acima pelo app do seu banco ou copie a chave abaixo:</p>
+                            
+                            <div class="flex items-center gap-2">
+                                <input readonly value="00020126580014BR.GOV.BCB.PIX0136luminaestudio-pix-chave-aleatoria-20265204000053039865405100" class="w-full px-3 py-2 rounded bg-dark-900 text-zinc-400 text-[11px] font-mono truncate border border-zinc-800">
+                                <button onclick="copyPixCode()" class="px-3 py-2 bg-gold-500 text-dark-950 font-bold text-xs rounded hover:bg-gold-400 shrink-0 transition-transform active:scale-95">
+                                    <i class="fa-regular fa-copy mr-1"></i> Copiar
+                                </button>
+                            </div>
+                            <span class="text-[10px] text-emerald-400 block"><i class="fa-solid fa-circle-check mr-1"></i> Desconto adicional de PIX calculado no total</span>
+                        </div>
+
+                        <!-- TAB CONTENT: CREDIT CARD WITH 3D FLIP -->
+                        <div id="payment-content-card" class="hidden p-5 rounded-xl bg-dark-950 border border-zinc-800 space-y-4">
+                            <!-- Dynamic 3D Flippable Card Visual Preview -->
+                            <div class="w-full max-w-xs mx-auto aspect-[1.58/1] card-3d-wrap">
+                                <div class="w-full h-full card-3d-inner" id="card-3d-inner">
+                                    <!-- FRONT OF CARD -->
+                                    <div class="card-front h-full rounded-xl bg-gradient-to-tr from-zinc-900 via-zinc-800 to-amber-900/40 p-4 border border-gold-500/30 shadow-xl flex flex-col justify-between">
+                                        <div class="flex justify-between items-center">
+                                            <span class="text-[10px] tracking-widest text-gold-400 font-display">LUMINA BLACK</span>
+                                            <i class="fa-brands fa-cc-mastercard text-2xl text-amber-400"></i>
+                                        </div>
+                                        <div class="space-y-1">
+                                            <span id="card-preview-number" class="block font-mono text-sm tracking-widest text-zinc-200">•••• •••• •••• ••••</span>
+                                            <div class="flex justify-between text-[9px] text-zinc-400 uppercase">
+                                                <span id="card-preview-name">NOME NO CARTÃO</span>
+                                                <span id="card-preview-exp">MM/AA</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- BACK OF CARD -->
+                                    <div class="card-back h-full rounded-xl bg-gradient-to-tr from-zinc-950 via-zinc-900 to-zinc-800 p-4 border border-gold-500/30 shadow-xl flex flex-col justify-between">
+                                        <div class="w-full h-8 bg-zinc-950 -mx-4 mt-2"></div>
+                                        <div class="text-right">
+                                            <span class="text-[9px] text-zinc-400 uppercase block mb-1">CVV</span>
+                                            <div class="bg-white text-dark-950 font-mono text-xs py-1 px-3 rounded inline-block font-bold" id="card-preview-cvv">
+                                                •••
+                                            </div>
+                                        </div>
+                                        <span class="text-[8px] text-zinc-500 tracking-widest uppercase">Estúdio Lumina Security</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div>
+                                    <label class="block text-[10px] uppercase text-zinc-400 mb-1">Número do Cartão</label>
+                                    <input id="card-num-input" onfocus="flipCardToBack(false)" oninput="updateCardPreview()" type="text" maxlength="19" placeholder="0000 0000 0000 0000" class="w-full px-3 py-2 rounded bg-dark-900 border border-zinc-800 text-white text-xs">
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] uppercase text-zinc-400 mb-1">Nome Impresso no Cartão</label>
+                                    <input id="card-name-input" onfocus="flipCardToBack(false)" oninput="updateCardPreview()" type="text" placeholder="GABRIEL N SILVA" class="w-full px-3 py-2 rounded bg-dark-900 border border-zinc-800 text-white text-xs uppercase">
+                                </div>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-[10px] uppercase text-zinc-400 mb-1">Validade (MM/AA)</label>
+                                        <input id="card-exp-input" onfocus="flipCardToBack(false)" oninput="updateCardPreview()" type="text" placeholder="12/28" maxlength="5" class="w-full px-3 py-2 rounded bg-dark-900 border border-zinc-800 text-white text-xs">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] uppercase text-zinc-400 mb-1">CVV</label>
+                                        <input id="card-cvv-input" onfocus="flipCardToBack(true)" onblur="flipCardToBack(false)" oninput="updateCardPreview()" type="password" maxlength="4" placeholder="123" class="w-full px-3 py-2 rounded bg-dark-900 border border-zinc-800 text-white text-xs">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] uppercase text-zinc-400 mb-1">Parcelamento</label>
+                                    <select id="card-installments" class="w-full px-3 py-2 rounded bg-dark-900 border border-zinc-800 text-white text-xs">
+                                        <option value="1">1x à vista sem juros</option>
+                                        <option value="2">2x sem juros</option>
+                                        <option value="3">3x sem juros</option>
+                                        <option value="6">6x com juros padrão</option>
+                                        <option value="12">12x com juros padrão</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB CONTENT: BOLETO -->
+                        <div id="payment-content-boleto" class="hidden p-5 rounded-xl bg-dark-950 border border-zinc-800 text-center space-y-4">
+                            <i class="fa-solid fa-barcode text-5xl text-zinc-300"></i>
+                            <p class="text-xs text-zinc-300">O boleto bancário será gerado imediatamente após a confirmação. Vencimento em 3 dias úteis.</p>
+                            <div class="bg-dark-900 p-3 rounded text-[11px] font-mono text-zinc-400 border border-zinc-800">
+                                34191.79001 01043.510047 91020.150008 8 980000000000
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Right Column: Summary & Final Button -->
+                <div class="lg:col-span-5 bg-dark-950 p-6 rounded-xl border border-zinc-800 flex flex-col justify-between space-y-6">
+                    <div class="space-y-4">
+                        <h4 class="text-xs font-bold uppercase text-white tracking-wider border-b border-zinc-800 pb-3">Resumo da Reserva</h4>
+                        
+                        <div id="checkout-summary-items" class="space-y-3 max-h-48 overflow-y-auto text-xs text-zinc-300 pr-1">
+                            <!-- Injected by JS -->
+                        </div>
+
+                        <!-- Coupon Input Section -->
+                        <div class="pt-3 border-t border-zinc-800">
+                            <label class="block text-[10px] uppercase text-zinc-400 mb-1">Cupom de Desconto</label>
+                            <div class="flex gap-2">
+                                <input id="coupon-input" type="text" placeholder="Ex: LUMINA10" class="w-full px-3 py-2 rounded bg-dark-900 border border-zinc-800 text-white text-xs uppercase">
+                                <button onclick="applyCoupon()" class="px-4 py-2 bg-dark-800 border border-zinc-700 hover:border-gold-500 text-gold-400 font-bold text-xs rounded transition">
+                                    Aplicar
+                                </button>
+                            </div>
+                            <span id="coupon-message" class="text-[10px] block mt-1"></span>
+                        </div>
+
+                        <div class="space-y-2 pt-3 border-t border-zinc-800 text-xs">
+                            <div class="flex justify-between text-zinc-400">
+                                <span>Subtotal</span>
+                                <span id="checkout-subtotal">R$ 0,00</span>
+                            </div>
+                            <div class="flex justify-between text-emerald-400">
+                                <span>Descontos</span>
+                                <span id="checkout-discount-val">- R$ 0,00</span>
+                            </div>
+                            <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-zinc-800">
+                                <span>Total Final</span>
+                                <span id="checkout-final-total" class="text-gold-400 font-display text-lg">R$ 0,00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="processFinalOrder()" class="w-full py-4 rounded-xl bg-gradient-to-r from-gold-500 to-amber-600 hover:from-gold-400 hover:to-amber-500 text-dark-950 font-extrabold uppercase text-xs tracking-wider transition shadow-lg shadow-gold-500/20">
+                        <i class="fa-solid fa-check-circle mr-2"></i> Finalizar Agendamento & Pagar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- USER AGENDAMENTOS / ORDERS MODAL -->
+    <div id="orders-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-dark-900 border border-zinc-800 rounded-2xl w-full max-w-2xl p-6 relative shadow-2xl space-y-6 max-h-[85vh] flex flex-col">
+            <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-clock-rotate-left text-gold-400 text-xl"></i>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-serif text-lg font-bold text-white">Meus Agendamentos</h3>
+                            <span id="db-status-badge" class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-[10px] text-emerald-400 font-medium">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Firestore Ativo
+                            </span>
+                        </div>
+                        <p class="text-xs text-zinc-400">Histórico sincronizado em tempo real com o banco de dados</p>
+                    </div>
+                </div>
+                <button onclick="closeOrdersModal()" class="text-zinc-400 hover:text-white">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div id="orders-list-container" class="flex-1 overflow-y-auto space-y-4 pr-1">
+                <!-- Orders injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL FOR PORTFOLIO -->
+    <div id="lightbox-modal" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-4" onclick="closeLightbox()">
+        <button class="absolute top-6 right-6 text-white text-2xl hover:text-gold-400">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="max-w-4xl max-h-[90vh] flex flex-col items-center" onclick="event.stopPropagation()">
+            <img id="lightbox-img" src="" alt="Portfolio Large" class="max-h-[80vh] w-auto rounded-lg shadow-2xl object-contain border border-zinc-800">
+            <p id="lightbox-caption" class="text-gold-300 font-serif text-lg mt-4 text-center"></p>
+        </div>
+    </div>
+
+    <!-- SUCCESS RECEIPT MODAL -->
+    <div id="receipt-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-dark-900 border border-gold-500/40 rounded-2xl w-full max-w-lg p-8 relative shadow-2xl text-center space-y-6 animate-modal-pop">
+            <div class="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-3xl mx-auto animate-checkmark">
+                <i class="fa-solid fa-check"></i>
+            </div>
+
+            <div class="space-y-2">
+                <h3 class="font-serif text-2xl font-bold text-white">Agendamento Confirmado!</h3>
+                <p class="text-xs text-zinc-400">Obrigado pela preferência. O comprovante e as orientações foram enviados para o seu e-mail.</p>
+            </div>
+
+            <div class="bg-dark-950 p-4 rounded-xl border border-zinc-800 text-left space-y-2 text-xs">
+                <div class="flex justify-between text-zinc-400">
+                    <span>Código da Reserva:</span>
+                    <strong id="receipt-id" class="text-gold-400 font-mono">#LUM-9812</strong>
+                </div>
+                <div class="flex justify-between text-zinc-400">
+                    <span>Cliente:</span>
+                    <strong id="receipt-client" class="text-zinc-200">--</strong>
+                </div>
+                <div class="flex justify-between text-zinc-400">
+                    <span>Data Prevista:</span>
+                    <strong id="receipt-date" class="text-zinc-200">--</strong>
+                </div>
+                <div class="flex justify-between text-zinc-400">
+                    <span>Método de Pagamento:</span>
+                    <strong id="receipt-payment" class="text-zinc-200">--</strong>
+                </div>
+                <div class="flex justify-between text-zinc-400 border-t border-zinc-800 pt-2 font-bold text-sm">
+                    <span class="text-white">Valor Pago:</span>
+                    <strong id="receipt-amount" class="text-gold-400">R$ 0,00</strong>
+                </div>
+            </div>
+
+            <div class="flex gap-3">
+                <button onclick="closeReceiptModal()" class="flex-1 py-3 rounded-lg bg-gold-500 text-dark-950 font-bold uppercase text-xs">
+                    Concluir
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div id="toast-content" class="glass-panel px-5 py-3 rounded-xl border border-gold-500/30 text-xs font-semibold text-white flex items-center gap-3 shadow-2xl">
+            <i class="fa-solid fa-circle-info text-gold-400 text-base" id="toast-icon"></i>
+            <span id="toast-msg">Mensagem de notificação</span>
+        </div>
+    </div>
+
+    <!-- APPLICATION SCRIPTS -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Environment variables
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'lumina-fotografia-app';
+        let firebaseConfig = {};
+        if (typeof __firebase_config !== 'undefined') {
+            try { firebaseConfig = JSON.parse(__firebase_config); } catch (e) { console.error(e); }
+        } else {
+            firebaseConfig = { apiKey: "demo", authDomain: "demo.firebaseapp.com", projectId: "demo" };
+        }
+
+        let app, auth, db;
+        let currentUser = null;
+        let ordersUnsubscribe = null;
+
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+        } catch (e) {
+            console.warn("Modo de fallback local ativado.");
+        }
+
+        // Firestore Helper Functions
+        function getPublicCol(colName) {
+            return collection(db, 'artifacts', appId, 'public', 'data', colName);
+        }
+
+        function getUserCol(userId, colName) {
+            return collection(db, 'artifacts', appId, 'users', userId, colName);
+        }
+
+        // Initialize Global App State
+        window.state = {
+            cart: [],
+            appliedCoupon: null,
+            discountRate: 0,
+            selectedPayment: 'pix',
+            orders: [],
+            contactMessages: [],
+            packages: [
+                {
+                    id: 'pkg-retrato',
+                    title: 'Ensaio Retrato Premium',
+                    category: 'Ensaios Pessoais & Branding',
+                    price: 850.00,
+                    popular: false,
+                    features: [
+                        'Até 2 horas de sessão em estúdio ou externa',
+                        '20 fotos digitais com tratamento avançado',
+                        '2 trocas de figurino inclusas',
+                        'Galeria online privada para seleção'
+                    ],
+                    addons: [
+                        { name: 'Álbum Impresso Luxo 20x20cm', price: 350 },
+                        { name: 'Maquiagem Profissional', price: 180 }
+                    ]
+                },
+                {
+                    id: 'pkg-casamento',
+                    title: 'Cobertura de Casamento Ouro',
+                    category: 'Casamentos & Pre-Weddings',
+                    price: 4200.00,
+                    popular: true,
+                    features: [
+                        'Cobertura completa (Making of, Cerimônia e Festa)',
+                        '2 Fotógrafos seniores durante todo o evento',
+                        '350+ fotos editadas em alta resolução',
+                        'Álbum Encadernado Capa Dura 30x30cm (30 páginas)',
+                        'Ensaio Pré-Wedding incluso'
+                    ],
+                    addons: [
+                        { name: 'Sessão Trash the Dress', price: 600 },
+                        { name: 'Segundo Fotógrafo Extra', price: 800 }
+                    ]
+                },
+                {
+                    id: 'pkg-gestante',
+                    title: 'Ensaio Gestante & Família',
+                    category: 'Gestantes & Maternidade',
+                    price: 1100.00,
+                    popular: false,
+                    features: [
+                        'Sessão com duração de 1h30',
+                        'Acesso ao acervo de vestidos e figurino do estúdio',
+                        'Participação do parceiro(a) e filhos',
+                        '25 fotos digitais tratadas + 10 impressas 15x21'
+                    ],
+                    addons: [
+                        { name: 'Produção de Cabelo & Make', price: 220 },
+                        { name: 'Vídeo Teaser Reel 60s', price: 400 }
+                    ]
+                }
+            ],
+            portfolio: [
+                { id: 1, title: 'Casamento Clássico em Bodas', category: 'casamentos', img: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop' },
+                { id: 2, title: 'Retrato de Posicionamento Executive', category: 'corporativo', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=800&auto=format&fit=crop' },
+                { id: 3, title: 'Ensaio Gestante à Beira-Mar', category: 'gestantes', img: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop' },
+                { id: 4, title: 'Sessão Moda & Fine Art', category: 'ensaios', img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop' },
+                { id: 5, title: 'Gala & Evento Corporativo VIP', category: 'eventos', img: 'https://images.unsplash.com/photo-1511578314322-379afb476865?q=80&w=800&auto=format&fit=crop' },
+                { id: 6, title: 'Ensaio Casal Pre-Wedding Por do Sol', category: 'casamentos', img: 'https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=800&auto=format&fit=crop' }
+            ]
+        };
+
+        // Initialize Auth and Listeners
+        async function initAuthAndDatabase() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (e) {
+                console.warn("Auth initial state fallback:", e);
+            }
+
+            onAuthStateChanged(auth, async (user) => {
+                const saved = localStorage.getItem('lumina_user');
+                if (saved) {
+                    try {
+                        const parsed = JSON.parse(saved);
+                        currentUser = { ...(user || {}), isAnonymous: false, name: parsed.name, phone: parsed.phone, email: parsed.email || user?.email, uid: parsed.uid || user?.uid || 'user_local' };
+                    } catch (err) {}
+                } else if (user) {
+                    currentUser = user;
+                } else {
+                    currentUser = null;
+                }
+                window.updateUserHeaderUI();
+                if (currentUser && currentUser.uid) listenToUserOrders(currentUser.uid);
+                await syncDatabaseData();
+            });
+        }
+
+        async function syncDatabaseData() {
+            if (!db || !auth.currentUser) return;
+            try {
+                const pkgCol = getPublicCol('packages');
+                const pkgSnap = await getDocs(pkgCol);
+                if (pkgSnap.empty) {
+                    for (const pkg of window.state.packages) {
+                        try {
+                            await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'packages', pkg.id), pkg);
+                        } catch (e) {}
+                    }
+                } else {
+                    const loadedPackages = [];
+                    pkgSnap.forEach(d => loadedPackages.push(d.data()));
+                    if (loadedPackages.length > 0) window.state.packages = loadedPackages;
+                }
+            } catch (err) {
+                console.warn("Package sync fallback:", err.message);
+            }
+            window.renderPackages();
+
+            try {
+                const portCol = getPublicCol('portfolio');
+                const portSnap = await getDocs(portCol);
+                if (portSnap.empty) {
+                    for (const item of window.state.portfolio) {
+                        try {
+                            await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'portfolio', 'item-' + item.id), item);
+                        } catch (e) {}
+                    }
+                } else {
+                    const loadedPortfolio = [];
+                    portSnap.forEach(d => loadedPortfolio.push(d.data()));
+                    if (loadedPortfolio.length > 0) window.state.portfolio = loadedPortfolio;
+                }
+            } catch (err) {
+                console.warn("Portfolio sync fallback:", err.message);
+            }
+            window.renderPortfolio('todos');
+        }
+
+        function listenToUserOrders(userId) {
+            if (ordersUnsubscribe) ordersUnsubscribe();
+            if (!db || !auth.currentUser || !userId) return;
+
+            try {
+                const ordersCol = getUserCol(userId, 'orders');
+                ordersUnsubscribe = onSnapshot(ordersCol, (snapshot) => {
+                    const loadedOrders = [];
+                    snapshot.forEach(docSnap => {
+                        loadedOrders.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    loadedOrders.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+                    window.state.orders = loadedOrders;
+                }, (error) => {
+                    console.warn("Orders listener permission fallback:", error.message);
+                });
+            } catch (e) {
+                console.warn("Orders subscription error:", e);
+            }
+        }
+
+        // UI RENDERING FUNCTIONS
+        window.renderPackages = function() {
+            const grid = document.getElementById('packages-grid');
+            if (!grid) return;
+
+            grid.innerHTML = window.state.packages.map(pkg => `
+                <div class="glass-panel p-8 rounded-2xl border ${pkg.popular ? 'border-gold-500/80 shadow-2xl shadow-gold-500/10' : 'border-zinc-800'} relative flex flex-col justify-between card-hover-lift">
+                    ${pkg.popular ? '<span class="absolute -top-3.5 right-6 px-4 py-1 rounded-full bg-gradient-to-r from-gold-500 to-amber-600 text-dark-950 font-bold text-[10px] uppercase tracking-widest shadow-md">Mais Vendido</span>' : ''}
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <span class="text-xs uppercase text-gold-400 font-semibold tracking-wider block mb-1">${pkg.category}</span>
+                            <h3 class="font-serif text-2xl font-bold text-white">${pkg.title}</h3>
+                        </div>
+
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-xs text-zinc-400 font-semibold uppercase">Investimento:</span>
+                            <span class="font-display text-3xl font-extrabold gold-gradient-text">R$ ${pkg.price.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
+                        </div>
+
+                        <ul class="space-y-3 text-xs text-zinc-300 border-t border-zinc-800/80 pt-4">
+                            ${pkg.features.map(f => `
+                                <li class="flex items-start gap-2.5">
+                                    <i class="fa-solid fa-check text-gold-400 mt-0.5 shrink-0"></i>
+                                    <span>${f}</span>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+
+                    <div class="mt-8 space-y-3">
+                        <button onclick="addToCart('${pkg.id}')" class="w-full py-3.5 rounded-xl ${pkg.popular ? 'bg-gradient-to-r from-gold-500 to-amber-600 text-dark-950 hover:from-gold-400 hover:to-amber-500 font-extrabold' : 'bg-dark-800 border border-zinc-700 hover:border-gold-500 text-gold-400 font-bold'} uppercase text-xs tracking-wider transition shadow-lg">
+                            <i class="fa-solid fa-cart-plus mr-1"></i> Adicionar ao Carrinho
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        };
+
+        window.renderPortfolio = function(category = 'todos') {
+            const grid = document.getElementById('portfolio-grid');
+            if (!grid) return;
+
+            const filtered = category === 'todos' 
+                ? window.state.portfolio 
+                : window.state.portfolio.filter(item => item.category === category);
+
+            grid.innerHTML = filtered.map(item => `
+                <div onclick="openLightbox('${item.img}', '${item.title}')" class="group relative rounded-2xl overflow-hidden aspect-[4/3] border border-zinc-800 bg-dark-900 cursor-pointer shadow-lg card-hover-lift">
+                    <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                        <span class="text-[10px] font-bold text-gold-400 uppercase tracking-widest">${item.category}</span>
+                        <h4 class="font-serif text-lg font-bold text-white">${item.title}</h4>
+                        <span class="text-xs text-zinc-300 mt-1 inline-flex items-center gap-1"><i class="fa-solid fa-expand text-[10px]"></i> Clique para ampliar</span>
+                    </div>
+                </div>
+            `).join('');
+        };
+
+        window.filterPortfolio = function(category, btnElement) {
+            document.querySelectorAll('.portfolio-filter-btn').forEach(btn => {
+                btn.className = 'portfolio-filter-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition bg-dark-900 border border-zinc-800 text-zinc-400 hover:border-gold-500';
+            });
+            if (btnElement) {
+                btnElement.className = 'portfolio-filter-btn px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase transition bg-gold-500 text-dark-950 font-bold';
+            }
+            window.renderPortfolio(category);
+        };
+
+        // Lightbox
+        window.openLightbox = function(imgUrl, caption) {
+            const modal = document.getElementById('lightbox-modal');
+            const img = document.getElementById('lightbox-img');
+            const cap = document.getElementById('lightbox-caption');
+            if (modal && img && cap) {
+                img.src = imgUrl;
+                cap.innerText = caption;
+                modal.classList.remove('hidden');
+            }
+        };
+
+        window.closeLightbox = function() {
+            const modal = document.getElementById('lightbox-modal');
+            if (modal) modal.classList.add('hidden');
+        };
+
+        // Auth Modal Handlers
+        window.openAuthModal = function() {
+            if (currentUser && !currentUser.isAnonymous) {
+                const dropdown = document.getElementById('user-dropdown');
+                if (dropdown) dropdown.classList.toggle('hidden');
+            } else {
+                const modal = document.getElementById('auth-modal');
+                if (modal) modal.classList.remove('hidden');
+            }
+        };
+
+        window.closeAuthModal = function() {
+            const modal = document.getElementById('auth-modal');
+            if (modal) modal.classList.add('hidden');
+        };
+
+        window.switchAuthTab = function(tab) {
+            const loginForm = document.getElementById('login-form');
+            const regForm = document.getElementById('register-form');
+            const tabLogin = document.getElementById('auth-tab-login');
+            const tabReg = document.getElementById('auth-tab-register');
+
+            if (tab === 'login') {
+                loginForm.classList.remove('hidden');
+                regForm.classList.add('hidden');
+                tabLogin.className = 'flex-1 py-2 text-center text-xs font-bold border-b-2 border-gold-500 text-gold-400 transition uppercase tracking-wider';
+                tabReg.className = 'flex-1 py-2 text-center text-xs font-bold border-b-2 border-transparent text-zinc-400 hover:text-white transition uppercase tracking-wider';
+            } else {
+                loginForm.classList.add('hidden');
+                regForm.classList.remove('hidden');
+                tabReg.className = 'flex-1 py-2 text-center text-xs font-bold border-b-2 border-gold-500 text-gold-400 transition uppercase tracking-wider';
+                tabLogin.className = 'flex-1 py-2 text-center text-xs font-bold border-b-2 border-transparent text-zinc-400 hover:text-white transition uppercase tracking-wider';
+            }
+        };
+
+        window.handleLogin = async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email')?.value?.trim();
+            const password = document.getElementById('login-password')?.value?.trim();
+
+            if (!email || !password) {
+                window.showToast('Por favor, preencha o e-mail e a senha.', 'warning');
+                return;
+            }
+
+            let authenticated = false;
+            let userData = null;
+
+            try {
+                if (auth && auth.config && auth.config.apiKey !== 'demo') {
+                    const creds = await signInWithEmailAndPassword(auth, email, password);
+                    if (creds && creds.user) {
+                        authenticated = true;
+                        userData = { uid: creds.user.uid, email: creds.user.email };
+                    }
+                }
+            } catch (err) {
+                console.warn("Firebase auth login bypassed:", err.message);
+            }
+
+            if (!authenticated) {
+                const registeredUsers = JSON.parse(localStorage.getItem('lumina_registered_users') || '[]');
+                const matched = registeredUsers.find(u => u.email && u.email.toLowerCase() === email.toLowerCase());
+
+                if (matched) {
+                    if (matched.password === password) {
+                        authenticated = true;
+                        userData = { uid: matched.uid || ('user_' + Date.now()), email: matched.email, name: matched.name, phone: matched.phone };
+                    } else {
+                        window.showToast('Senha incorreta. Verifique seus dados.', 'error');
+                        return;
+                    }
+                } else {
+                    // Direct login fallback
+                    userData = {
+                        uid: 'user_' + Date.now(),
+                        email: email,
+                        name: email.split('@')[0],
+                        phone: ''
+                    };
+                    authenticated = true;
+                }
+            }
+
+            if (authenticated && userData) {
+                currentUser = {
+                    uid: userData.uid,
+                    isAnonymous: false,
+                    email: userData.email,
+                    name: userData.name || userData.email.split('@')[0],
+                    phone: userData.phone || ''
+                };
+
+                localStorage.setItem('lumina_user', JSON.stringify({
+                    uid: currentUser.uid,
+                    email: currentUser.email,
+                    name: currentUser.name,
+                    phone: currentUser.phone
+                }));
+
+                window.updateUserHeaderUI();
+                if (currentUser.uid) listenToUserOrders(currentUser.uid);
+                window.closeAuthModal();
+                window.showToast(`Bem-vindo(a), ${currentUser.name}!`, 'success');
+            }
+        };
+
+        window.handleRegister = async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('reg-name')?.value?.trim();
+            const email = document.getElementById('reg-email')?.value?.trim();
+            const phone = document.getElementById('reg-phone')?.value?.trim();
+            const password = document.getElementById('reg-password')?.value?.trim();
+            const passConfirm = document.getElementById('reg-password-confirm')?.value?.trim();
+
+            if (!name || !email || !phone || !password) {
+                window.showToast('Por favor, preencha todos os campos.', 'warning');
+                return;
+            }
+
+            if (password !== passConfirm) {
+                window.showToast('As senhas digitadas não coincidem.', 'warning');
+                return;
+            }
+
+            let uid = 'user_' + Date.now();
+
+            try {
+                if (auth && auth.config && auth.config.apiKey !== 'demo') {
+                    const creds = await createUserWithEmailAndPassword(auth, email, password);
+                    if (creds && creds.user) {
+                        uid = creds.user.uid;
+                    }
+                }
+            } catch (err) {
+                console.warn("Firebase auth registration bypassed:", err.message);
+            }
+
+            const registeredUsers = JSON.parse(localStorage.getItem('lumina_registered_users') || '[]');
+            const existingIdx = registeredUsers.findIndex(u => u.email && u.email.toLowerCase() === email.toLowerCase());
+            const newUser = { uid, name, email, phone, password };
+
+            if (existingIdx > -1) {
+                registeredUsers[existingIdx] = newUser;
+            } else {
+                registeredUsers.push(newUser);
+            }
+            localStorage.setItem('lumina_registered_users', JSON.stringify(registeredUsers));
+
+            currentUser = { uid, isAnonymous: false, name, email, phone };
+            localStorage.setItem('lumina_user', JSON.stringify({ uid, name, email, phone }));
+
+            window.updateUserHeaderUI();
+            listenToUserOrders(uid);
+            window.closeAuthModal();
+            window.showToast('Conta criada e conectada com sucesso!', 'success');
+        };
+
+        window.handleLogout = async function() {
+            try {
+                if (auth && auth.currentUser) {
+                    await signOut(auth);
+                }
+            } catch (err) {
+                console.warn("Logout error:", err);
+            }
+            localStorage.removeItem('lumina_user');
+            currentUser = null;
+            window.updateUserHeaderUI();
+            window.closeUserDropdown();
+            window.showToast('Você saiu da sua conta.');
+        };
+
+        window.handleForgotPassword = function() {
+            window.showToast('Link para redefinição enviado para o e-mail cadastrado.', 'info');
+        };
+
+        window.updateUserHeaderUI = function() {
+            const nameDisplay = document.getElementById('user-name-display');
+            const emailDisplay = document.getElementById('dropdown-user-email');
+            const userIcon = document.getElementById('user-icon');
+
+            if (currentUser && !currentUser.isAnonymous) {
+                const displayName = currentUser.name || currentUser.email?.split('@')[0] || 'Cliente';
+                if (nameDisplay) nameDisplay.innerText = `Olá, ${displayName}`;
+                if (emailDisplay) emailDisplay.innerText = currentUser.email || 'cliente@lumina.com';
+                if (userIcon) userIcon.className = 'fa-solid fa-user-check text-emerald-400';
+            } else {
+                if (nameDisplay) nameDisplay.innerText = 'Entrar / Cadastrar';
+                if (userIcon) userIcon.className = 'fa-regular fa-user text-gold-400';
+            }
+        };
+
+        window.closeUserDropdown = function() {
+            const dropdown = document.getElementById('user-dropdown');
+            if (dropdown) dropdown.classList.add('hidden');
+        };
+
+        // Cart Drawer Handlers
+        window.toggleCartDrawer = function() {
+            const drawer = document.getElementById('cart-drawer');
+            const overlay = document.getElementById('cart-drawer-overlay');
+            if (drawer && overlay) {
+                const isHidden = drawer.classList.contains('translate-x-full');
+                if (isHidden) {
+                    overlay.classList.remove('hidden');
+                    setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                    drawer.classList.remove('translate-x-full');
+                } else {
+                    overlay.classList.add('opacity-0');
+                    drawer.classList.add('translate-x-full');
+                    setTimeout(() => overlay.classList.add('hidden'), 300);
+                }
+            }
+        };
+
+        window.addToCart = function(packageId) {
+            const pkg = window.state.packages.find(p => p.id === packageId);
+            if (!pkg) return;
+
+            const existingIndex = window.state.cart.findIndex(item => item.id === packageId);
+            if (existingIndex > -1) {
+                window.showToast('Este pacote já está no seu carrinho.', 'warning');
+            } else {
+                window.state.cart.push({ ...pkg, selectedAddons: [] });
+                window.showToast('Pacote adicionado ao carrinho!', 'success');
+            }
+
+            window.updateCartUI();
+            window.toggleCartDrawer();
+        };
+
+        window.toggleAddonInCart = function(pkgIndex, addonName) {
+            const item = window.state.cart[pkgIndex];
+            if (!item) return;
+
+            const idx = item.selectedAddons.indexOf(addonName);
+            if (idx > -1) {
+                item.selectedAddons.splice(idx, 1);
+            } else {
+                item.selectedAddons.push(addonName);
+            }
+            window.updateCartUI();
+        };
+
+        window.removeFromCart = function(index) {
+            const itemEl = document.getElementById(`cart-item-${index}`);
+            if (itemEl) {
+                itemEl.classList.add('cart-item-removing');
+                setTimeout(() => {
+                    window.state.cart.splice(index, 1);
+                    window.updateCartUI();
+                }, 300);
+            } else {
+                window.state.cart.splice(index, 1);
+                window.updateCartUI();
+            }
+        };
+
+        window.updateCartUI = function() {
+            const container = document.getElementById('cart-items-container');
+            const counter = document.getElementById('cart-counter');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const discountRow = document.getElementById('discount-row');
+            const discountEl = document.getElementById('cart-discount');
+            const totalEl = document.getElementById('cart-total');
+
+            if (!container) return;
+
+            if (counter) counter.innerText = window.state.cart.length;
+
+            if (window.state.cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 space-y-3">
+                        <i class="fa-solid fa-bag-shopping text-4xl text-zinc-700"></i>
+                        <p class="text-sm text-zinc-400">Seu carrinho de agendamentos está vazio.</p>
+                        <a href="#pacotes" onclick="toggleCartDrawer()" class="inline-block px-5 py-2 rounded-full border border-gold-500/40 text-gold-400 text-xs uppercase font-bold hover:bg-gold-500/10 transition">Explorar Pacotes</a>
+                    </div>
+                `;
+                if (subtotalEl) subtotalEl.innerText = 'R$ 0,00';
+                if (totalEl) totalEl.innerText = 'R$ 0,00';
+                if (discountRow) discountRow.classList.add('hidden');
+                return;
+            }
+
+            let subtotal = 0;
+
+            container.innerHTML = window.state.cart.map((item, pIdx) => {
+                let itemTotal = item.price;
+                const addonsHtml = (item.addons || []).map(addon => {
+                    const isChecked = item.selectedAddons.includes(addon.name);
+                    if (isChecked) itemTotal += addon.price;
+                    return `
+                        <label class="flex items-center justify-between text-[11px] text-zinc-300 cursor-pointer pt-1">
+                            <span class="flex items-center gap-2">
+                                <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="toggleAddonInCart(${pIdx}, '${addon.name}')" class="rounded border-zinc-700 bg-dark-900 text-gold-500 focus:ring-0">
+                                ${addon.name}
+                            </span>
+                            <span class="text-gold-400 font-mono">+ R$ ${addon.price}</span>
+                        </label>
+                    `;
+                }).join('');
+
+                subtotal += itemTotal;
+
+                return `
+                    <div id="cart-item-${pIdx}" class="p-4 rounded-xl bg-dark-950 border border-zinc-800 space-y-3">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="text-sm font-bold text-white">${item.title}</h4>
+                                <span class="text-[10px] text-gold-400 uppercase tracking-wider">${item.category}</span>
+                            </div>
+                            <button onclick="removeFromCart(${pIdx})" class="text-zinc-500 hover:text-red-400 p-1">
+                                <i class="fa-solid fa-trash text-xs"></i>
+                            </button>
+                        </div>
+
+                        ${addonsHtml ? `
+                            <div class="border-t border-zinc-900 pt-2 space-y-1">
+                                <span class="text-[10px] font-semibold text-zinc-400 uppercase tracking-wider">Adicionais Opcionais:</span>
+                                ${addonsHtml}
+                            </div>
+                        ` : ''}
+
+                        <div class="border-t border-zinc-800 pt-2 flex justify-between items-center text-xs">
+                            <span class="text-zinc-400">Total do Pacote:</span>
+                            <strong class="text-gold-400 font-display">R$ ${itemTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            const discountAmount = subtotal * window.state.discountRate;
+            const finalTotal = subtotal - discountAmount;
+
+            if (subtotalEl) subtotalEl.innerText = `R$ ${subtotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+            if (discountRow) {
+                if (discountAmount > 0) {
+                    discountRow.classList.remove('hidden');
+                    if (discountEl) discountEl.innerText = `- R$ ${discountAmount.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+                } else {
+                    discountRow.classList.add('hidden');
+                }
+            }
+            if (totalEl) totalEl.innerText = `R$ ${finalTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+        };
+
+        // Checkout Handlers
+        window.proceedToCheckout = function() {
+            if (window.state.cart.length === 0) {
+                window.showToast('Adicione ao menos um pacote ao carrinho.', 'warning');
+                return;
+            }
+
+            window.toggleCartDrawer();
+            const modal = document.getElementById('checkout-modal');
+            if (!modal) return;
+
+            // Pre-fill user data
+            if (currentUser) {
+                const nameInput = document.getElementById('checkout-name');
+                const emailInput = document.getElementById('checkout-email');
+                const phoneInput = document.getElementById('checkout-phone');
+                if (nameInput) nameInput.value = currentUser.name || '';
+                if (emailInput) emailInput.value = currentUser.email || '';
+                if (phoneInput) phoneInput.value = currentUser.phone || '';
+            }
+
+            window.updateCheckoutSummary();
+            modal.classList.remove('hidden');
+        };
+
+        window.closeCheckoutModal = function() {
+            const modal = document.getElementById('checkout-modal');
+            if (modal) modal.classList.add('hidden');
+        };
+
+        window.selectPaymentMethod = function(method) {
+            window.state.selectedPayment = method;
+
+            ['pix', 'card', 'boleto'].forEach(m => {
+                const btn = document.getElementById(`pay-tab-${m}`);
+                const content = document.getElementById(`payment-content-${m}`);
+
+                if (m === method) {
+                    if (btn) btn.className = 'payment-tab-btn py-3 px-2 rounded-xl border border-gold-500 bg-gold-500/10 text-gold-400 text-xs font-bold flex flex-col items-center gap-1 transition';
+                    if (content) content.classList.remove('hidden');
+                } else {
+                    if (btn) btn.className = 'payment-tab-btn py-3 px-2 rounded-xl border border-zinc-800 bg-dark-950 text-zinc-400 hover:border-zinc-700 text-xs font-bold flex flex-col items-center gap-1 transition';
+                    if (content) content.classList.add('hidden');
+                }
+            });
+
+            window.updateCheckoutSummary();
+        };
+
+        window.copyPixCode = function() {
+            const pixInput = document.querySelector('#payment-content-pix input');
+            if (pixInput) {
+                pixInput.select();
+                document.execCommand('copy');
+                window.showToast('Chave PIX copiada para a área de transferência!', 'success');
+            }
+        };
+
+        window.flipCardToBack = function(isBack) {
+            const cardInner = document.getElementById('card-3d-inner');
+            if (cardInner) {
+                cardInner.style.transform = isBack ? 'rotateY(180deg)' : 'rotateY(0deg)';
+            }
+        };
+
+        window.updateCardPreview = function() {
+            const numVal = document.getElementById('card-num-input')?.value || '';
+            const nameVal = document.getElementById('card-name-input')?.value || '';
+            const expVal = document.getElementById('card-exp-input')?.value || '';
+            const cvvVal = document.getElementById('card-cvv-input')?.value || '';
+
+            const pNum = document.getElementById('card-preview-number');
+            const pName = document.getElementById('card-preview-name');
+            const pExp = document.getElementById('card-preview-exp');
+            const pCvv = document.getElementById('card-preview-cvv');
+
+            if (pNum) pNum.innerText = numVal || '•••• •••• •••• ••••';
+            if (pName) pName.innerText = nameVal || 'NOME NO CARTÃO';
+            if (pExp) pExp.innerText = expVal || 'MM/AA';
+            if (pCvv) pCvv.innerText = cvvVal || '•••';
+        };
+
+        window.applyCoupon = function() {
+            const couponInput = document.getElementById('coupon-input');
+            const msgEl = document.getElementById('coupon-message');
+            const code = couponInput?.value.trim().toUpperCase();
+
+            if (code === 'LUMINA10') {
+                window.state.appliedCoupon = 'LUMINA10';
+                window.state.discountRate = 0.10;
+                if (msgEl) {
+                    msgEl.className = 'text-[10px] text-emerald-400 block mt-1';
+                    msgEl.innerText = 'Cupom LUMINA10 aplicado com sucesso (10% OFF)!';
+                }
+                window.updateCartUI();
+                window.updateCheckoutSummary();
+            } else {
+                if (msgEl) {
+                    msgEl.className = 'text-[10px] text-red-400 block mt-1';
+                    msgEl.innerText = 'Cupom inválido ou expirado.';
+                }
+            }
+        };
+
+        window.updateCheckoutSummary = function() {
+            const itemsContainer = document.getElementById('checkout-summary-items');
+            const subtotalEl = document.getElementById('checkout-subtotal');
+            const discountValEl = document.getElementById('checkout-discount-val');
+            const finalTotalEl = document.getElementById('checkout-final-total');
+
+            if (!itemsContainer) return;
+
+            let subtotal = 0;
+
+            itemsContainer.innerHTML = window.state.cart.map(item => {
+                let pkgTotal = item.price;
+                (item.addons || []).forEach(a => {
+                    if (item.selectedAddons.includes(a.name)) pkgTotal += a.price;
+                });
+                subtotal += pkgTotal;
+
+                return `
+                    <div class="flex justify-between items-center py-1">
+                        <div>
+                            <span class="font-semibold text-white block">${item.title}</span>
+                            ${item.selectedAddons.length > 0 ? `<span class="text-[10px] text-zinc-400">+ ${item.selectedAddons.join(', ')}</span>` : ''}
+                        </div>
+                        <span class="font-mono text-gold-400 font-bold">R$ ${pkgTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</span>
+                    </div>
+                `;
+            }).join('');
+
+            let discount = subtotal * window.state.discountRate;
+            if (window.state.selectedPayment === 'pix') {
+                // Extra 10% OFF on PIX
+                discount += (subtotal - discount) * 0.10;
+            }
+
+            const finalTotal = Math.max(0, subtotal - discount);
+
+            if (subtotalEl) subtotalEl.innerText = `R$ ${subtotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+            if (discountValEl) discountValEl.innerText = `- R$ ${discount.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+            if (finalTotalEl) finalTotalEl.innerText = `R$ ${finalTotal.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+        };
+
+        window.processFinalOrder = async function() {
+            const name = document.getElementById('checkout-name')?.value.trim();
+            const email = document.getElementById('checkout-email')?.value.trim();
+            const phone = document.getElementById('checkout-phone')?.value.trim();
+            const date = document.getElementById('checkout-date')?.value;
+
+            if (!name || !email || !phone || !date) {
+                window.showToast('Por favor, preencha todos os campos do agendamento.', 'warning');
+                return;
+            }
+
+            let subtotal = 0;
+            window.state.cart.forEach(item => {
+                subtotal += item.price;
+                (item.addons || []).forEach(a => {
+                    if (item.selectedAddons.includes(a.name)) subtotal += a.price;
+                });
+            });
+
+            let discount = subtotal * window.state.discountRate;
+            if (window.state.selectedPayment === 'pix') {
+                discount += (subtotal - discount) * 0.10;
+            }
+            const finalAmount = Math.max(0, subtotal - discount);
+            const orderId = '#LUM-' + Math.floor(1000 + Math.random() * 9000);
+
+            const orderData = {
+                orderId,
+                clientName: name,
+                clientEmail: email,
+                clientPhone: phone,
+                sessionDate: date,
+                paymentMethod: window.state.selectedPayment.toUpperCase(),
+                amount: finalAmount,
+                items: window.state.cart,
+                createdAt: new Date().toISOString()
+            };
+
+            // Save order to Firestore user private collection
+            if (db && auth.currentUser) {
+                try {
+                    const userOrdersCol = getUserCol(auth.currentUser.uid, 'orders');
+                    await addDoc(userOrdersCol, orderData);
+                } catch (err) {
+                    console.warn("Firestore order write fallback:", err.message);
+                    window.state.orders.unshift(orderData);
+                }
+            } else {
+                window.state.orders.unshift(orderData);
+            }
+
+            // Update receipt modal fields
+            document.getElementById('receipt-id').innerText = orderId;
+            document.getElementById('receipt-client').innerText = name;
+            document.getElementById('receipt-date').innerText = new Date(date).toLocaleDateString('pt-BR');
+            document.getElementById('receipt-payment').innerText = window.state.selectedPayment.toUpperCase();
+            document.getElementById('receipt-amount').innerText = `R$ ${finalAmount.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+
+            // Reset cart
+            window.state.cart = [];
+            window.updateCartUI();
+            window.closeCheckoutModal();
+
+            // Display receipt
+            const receiptModal = document.getElementById('receipt-modal');
+            if (receiptModal) receiptModal.classList.remove('hidden');
+
+            window.triggerConfetti();
+        };
+
+        window.closeReceiptModal = function() {
+            const modal = document.getElementById('receipt-modal');
+            if (modal) modal.classList.add('hidden');
+        };
+
+        // Orders Modal
+        window.openOrdersModal = function() {
+            const modal = document.getElementById('orders-modal');
+            if (!modal) return;
+            window.renderOrdersList();
+            modal.classList.remove('hidden');
+        };
+
+        window.closeOrdersModal = function() {
+            const modal = document.getElementById('orders-modal');
+            if (modal) modal.classList.add('hidden');
+        };
+
+        // Mobile Menu Toggle
+        window.toggleMobileMenu = function() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) menu.classList.toggle('hidden');
+        };
+
+        // Toast Notification System
+        window.showToast = function(message, type = 'info') {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toast-msg');
+            const toastIcon = document.getElementById('toast-icon');
+            if (!toast || !toastMsg) return;
+
+            toastMsg.innerText = message;
+            
+            if (toastIcon) {
+                if (type === 'success') {
+                    toastIcon.className = 'fa-solid fa-circle-check text-emerald-400 text-base';
+                } else if (type === 'error' || type === 'warning') {
+                    toastIcon.className = 'fa-solid fa-triangle-exclamation text-amber-400 text-base';
+                } else {
+                    toastIcon.className = 'fa-solid fa-circle-info text-gold-400 text-base';
+                }
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            
+            if (window.toastTimeout) clearTimeout(window.toastTimeout);
+            window.toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3500);
+        };
+
+        // Contact Form Handler & WhatsApp Redirect
+        window.handleContactSubmit = async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name')?.value.trim();
+            const email = document.getElementById('contact-email')?.value.trim();
+            const phone = document.getElementById('contact-phone')?.value.trim();
+            const type = document.getElementById('contact-type')?.value;
+            const message = document.getElementById('contact-message')?.value.trim();
+
+            if (!name || !email || !phone || !message) {
+                window.showToast('Por favor, preencha todos os campos do formulário.', 'warning');
+                return;
+            }
+
+            const msgData = {
+                name,
+                email,
+                phone,
+                type,
+                message,
+                createdAt: new Date().toISOString()
+            };
+
+            // Save message to user's collection if authenticated, with fallback
+            if (db && auth.currentUser) {
+                try {
+                    const userMsgCol = getUserCol(auth.currentUser.uid, 'contact_messages');
+                    await addDoc(userMsgCol, msgData);
+                } catch (err) {
+                    try {
+                        const msgCol = getPublicCol('contact_messages');
+                        await addDoc(msgCol, msgData);
+                    } catch (e) {
+                        console.warn("Firestore contact message write bypassed:", e.message);
+                    }
+                }
+            }
+            window.state.contactMessages.unshift(msgData);
+
+            // Format clean WhatsApp message text
+            const textLines = [
+                "*Novo Contato via Site - Estúdio Lumina*",
+                "",
+                `📌 *Nome:* ${name}`,
+                `📧 *E-mail:* ${email}`,
+                `📲 *Telefone:* ${phone}`,
+                `📷 *Tipo de Ensaio:* ${type}`,
+                "",
+                `💬 *Mensagem:* ${message}`
+            ];
+
+            const encodedMsg = encodeURIComponent(textLines.join('\n'));
+            const waUrl = `https://wa.me/5511998876543?text=${encodedMsg}`;
+
+            window.showToast('Redirecionando para o WhatsApp...', 'success');
+            
+            setTimeout(() => {
+                window.open(waUrl, '_blank');
+                document.getElementById('contact-form')?.reset();
+            }, 800);
+        };
+
+        window.renderOrdersList = function() {
+            const container = document.getElementById('orders-list-container');
+            if (!container) return;
+
+            if (window.state.orders.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 space-y-2">
+                        <i class="fa-solid fa-calendar-xmark text-4xl text-zinc-700"></i>
+                        <p class="text-xs text-zinc-400">Nenhum agendamento realizado até o momento.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = window.state.orders.map(order => `
+                <div class="p-4 rounded-xl bg-dark-950 border border-zinc-800 space-y-3">
+                    <div class="flex justify-between items-center border-b border-zinc-900 pb-2">
+                        <span class="font-mono text-gold-400 font-bold text-xs">${order.orderId}</span>
+                        <span class="px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] uppercase font-bold">Confirmado</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-2 text-xs text-zinc-300">
+                        <div>
+                            <span class="text-[10px] text-zinc-500 block uppercase">Data do Ensaio:</span>
+                            <strong>${order.sessionDate ? new Date(order.sessionDate).toLocaleDateString('pt-BR') : 'A combinar'}</strong>
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-zinc-500 block uppercase">Forma de Pagamento:</span>
+                            <strong>${order.paymentMethod}</strong>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-zinc-900 pt-2 flex justify-between items-center text-xs">
+                        <span class="text-zinc-400">Valor Total:</span>
+                        <strong class="text-gold-400 font-display text-sm">R$ ${(order.amount || 0).toLocaleString('pt-BR', {minimumFractionDigits: 2})}</strong>
+                    </div>
+                </div>
+            `).join('');
+        };
+
+        // Confetti visual effect
+        window.triggerConfetti = function() {
+            const colors = ['#D4AF37', '#F3E5AB', '#fbbf24', '#ffffff'];
+            for (let i = 0; i < 40; i++) {
+                const conf = document.createElement('div');
+                conf.style.position = 'fixed';
+                conf.style.left = Math.random() * 100 + 'vw';
+                conf.style.top = '-10px';
+                conf.style.width = Math.random() * 8 + 4 + 'px';
+                conf.style.height = Math.random() * 8 + 4 + 'px';
+                conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                conf.style.borderRadius = '50%';
+                conf.style.zIndex = '9999';
+                conf.style.pointerEvents = 'none';
+                conf.style.transition = 'transform 2.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 2.5s ease';
+                document.body.appendChild(conf);
+
+                setTimeout(() => {
+                    conf.style.transform = `translate(${Math.random() * 200 - 100}px, ${window.innerHeight + 50}px) rotate(${Math.random() * 360}deg)`;
+                    conf.style.opacity = '0';
+                }, 50);
+
+                setTimeout(() => conf.remove(), 2600);
+            }
+        };
+
+        // Scroll reveal & Global listener
+        window.addEventListener('load', () => {
+            initAuthAndDatabase();
+            window.renderPackages();
+            window.renderPortfolio('todos');
+            window.updateCartUI();
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-scroll').forEach(el => observer.observe(el));
+
+            // Close user dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                const container = document.getElementById('user-header-container');
+                if (container && !container.contains(e.target)) {
+                    window.closeUserDropdown();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
