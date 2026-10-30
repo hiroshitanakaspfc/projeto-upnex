@@ -1,0 +1,2785 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#09090d">
+    <meta name="description" content="UPNEX Studio — Desenvolvimento de sites modernos, experiências digitais e soluções para empresas que querem crescer.">
+
+    <title>UPNEX Studio — Elevamos sua presença digital</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* ========================================
+           UPNEX STUDIO — DESIGN SYSTEM
+        ======================================== */
+
+        :root {
+            --bg: #09090d;
+            --bg-secondary: #101015;
+            --surface: #15151c;
+            --purple: #923cff;
+            --purple-light: #b77bff;
+            --white: #f7f5fc;
+            --muted: #9995a5;
+            --border: rgba(255,255,255,0.10);
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --container: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        body, button, input, textarea, select {
+            font-family: var(--font-body);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button, input, textarea, select {
+            font: inherit;
+        }
+
+        button, a {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button:focus-visible,
+        a:focus-visible,
+        input:focus-visible,
+        textarea:focus-visible,
+        select:focus-visible {
+            outline: 2px solid var(--purple-light);
+            outline-offset: 4px;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        ::selection {
+            background: var(--purple);
+            color: white;
+        }
+
+        .container {
+            width: min(var(--container), 88%);
+            margin-inline: auto;
+        }
+
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--purple-light);
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 24px;
+        }
+
+        .section-label::before {
+            content: "";
+            height: 1px;
+            width: 28px;
+            background: var(--purple);
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(35px, 5vw, 65px);
+            line-height: 1.08;
+            letter-spacing: -2.5px;
+            font-weight: 500;
+            max-width: 800px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(110deg, #fff 10%, #b77bff 65%, #923cff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-description {
+            color: var(--muted);
+            font-size: 15px;
+            max-width: 510px;
+            line-height: 1.9;
+            margin-top: 24px;
+        }
+
+        /* ========================================
+           HEADER
+        ======================================== */
+
+        .header {
+            height: 84px;
+            position: fixed;
+            inset: 0 0 auto;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid transparent;
+            transition: background .3s, border-color .3s;
+        }
+
+        .header.scrolled {
+            background: rgba(9,9,13,.91);
+            backdrop-filter: blur(18px);
+            border-bottom-color: var(--border);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 28px;
+            letter-spacing: -1.5px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: var(--purple-light);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 34px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #c0bdca;
+            font-size: 12px;
+            transition: color .25s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 18px;
+            border: 1px solid rgba(183,123,255,.5);
+            font-size: 12px;
+            transition: background .3s, transform .3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--purple);
+            transform: translateY(-2px);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: 0;
+            color: white;
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        /* ========================================
+           HERO
+        ======================================== */
+
+        .hero {
+            min-height: 100svh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 140px 0 75px;
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            z-index: -2;
+            width: 650px;
+            height: 650px;
+            right: -160px;
+            top: 8%;
+            background: radial-gradient(circle, rgba(111,35,213,.22), transparent 68%);
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.15fr .85fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .availability {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,.025);
+            padding: 9px 13px;
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #d1ceda;
+            margin-bottom: 35px;
+        }
+
+        .availability-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #a16aff;
+            box-shadow: 0 0 12px #923cff;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(52px, 7.3vw, 96px);
+            line-height: .98;
+            letter-spacing: -5px;
+            font-weight: 500;
+        }
+
+        .hero h1 span {
+            display: block;
+        }
+
+        .hero-description {
+            max-width: 470px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.9;
+            margin: 30px 0;
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .button-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            min-height: 52px;
+            padding: 0 22px;
+            background: var(--purple);
+            color: white;
+            border: 1px solid var(--purple);
+            font-size: 12px;
+            font-weight: 700;
+            transition: transform .3s, background .3s, box-shadow .3s;
+            cursor: pointer;
+        }
+
+        .button-primary:hover {
+            transform: translateY(-3px);
+            background: #a454ff;
+            box-shadow: 0 12px 35px rgba(146,60,255,.2);
+        }
+
+        .button-primary .arrow {
+            font-size: 19px;
+            transition: transform .3s;
+        }
+
+        .button-primary:hover .arrow {
+            transform: translateX(4px);
+        }
+
+        .text-link {
+            color: #d0cbd8;
+            font-size: 12px;
+            border-bottom: 1px solid #62566f;
+            padding-bottom: 5px;
+            transition: color .3s;
+        }
+
+        .text-link:hover {
+            color: var(--purple-light);
+        }
+
+        /* Composição visual do hero */
+
+        .hero-visual {
+            position: relative;
+            min-height: 480px;
+            display: grid;
+            place-items: center;
+            perspective: 1000px;
+        }
+
+        .visual-orbit {
+            width: min(100%, 450px);
+            aspect-ratio: 1;
+            position: relative;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(183,123,255,.14);
+            border-radius: 50%;
+            animation: orbitPulse 7s ease-in-out infinite;
+        }
+
+        .visual-orbit::before,
+        .visual-orbit::after {
+            content: "";
+            position: absolute;
+            border: 1px solid rgba(183,123,255,.12);
+            border-radius: 50%;
+        }
+
+        .visual-orbit::before {
+            inset: 9%;
+        }
+
+        .visual-orbit::after {
+            inset: 19%;
+            border-color: rgba(183,123,255,.18);
+        }
+
+        .visual-core {
+            width: 44%;
+            aspect-ratio: 1;
+            position: relative;
+            display: grid;
+            place-items: center;
+            background: radial-gradient(circle at 35% 25%, #bc8bff, #6320ba 45%, #160c28 78%);
+            border: 1px solid rgba(222,190,255,.5);
+            box-shadow: 0 0 90px rgba(127,44,229,.3), inset 0 0 35px rgba(255,255,255,.1);
+            transform: rotate(-12deg);
+            animation: coreFloat 6s ease-in-out infinite;
+        }
+
+        .visual-core span {
+            font-family: var(--font-heading);
+            font-size: clamp(38px, 6vw, 70px);
+            font-weight: 700;
+            letter-spacing: -5px;
+            text-shadow: 0 4px 30px rgba(0,0,0,.3);
+        }
+
+        .orbit-point {
+            position: absolute;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #c99aff;
+            box-shadow: 0 0 22px #923cff;
+        }
+
+        .orbit-point.one {
+            top: 15%;
+            right: 18%;
+        }
+
+        .orbit-point.two {
+            bottom: 19%;
+            left: 12%;
+            width: 8px;
+            height: 8px;
+        }
+
+        .orbit-point.three {
+            bottom: 12%;
+            right: 25%;
+            width: 6px;
+            height: 6px;
+        }
+
+        .visual-caption {
+            position: absolute;
+            bottom: 7%;
+            right: 0;
+            padding: 15px 19px;
+            background: rgba(15,15,22,.85);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .visual-caption small {
+            display: block;
+            color: var(--muted);
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .visual-caption strong {
+            display: block;
+            font-family: var(--font-heading);
+            font-size: 17px;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .hero-index {
+            position: absolute;
+            bottom: 35px;
+            left: 6%;
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #77717f;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 32px;
+            right: 6%;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #a5a0af;
+        }
+
+        .scroll-line {
+            width: 45px;
+            height: 1px;
+            background: var(--purple-light);
+            transform-origin: left;
+            animation: linePulse 2s ease-in-out infinite;
+        }
+
+        /* ========================================
+           MARQUEE
+        ======================================== */
+
+        .marquee {
+            overflow: hidden;
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            background: #0c0b11;
+            padding: 21px 0;
+        }
+
+        .marquee-track {
+            display: flex;
+            width: max-content;
+            animation: marquee 30s linear infinite;
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+            padding-right: 35px;
+            color: #bcb5c9;
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 3px;
+            white-space: nowrap;
+        }
+
+        .marquee-item span {
+            color: var(--purple-light);
+            font-size: 19px;
+        }
+
+        /* ========================================
+           SOBRE
+        ======================================== */
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: .85fr 1.15fr;
+            gap: 100px;
+            align-items: start;
+        }
+
+        .about-side {
+            position: sticky;
+            top: 130px;
+        }
+
+        .about-copy {
+            padding-top: 50px;
+        }
+
+        .about-copy p {
+            color: var(--muted);
+            font-size: 15px;
+            line-height: 2;
+            margin-bottom: 22px;
+        }
+
+        .about-statement {
+            border-left: 2px solid var(--purple);
+            padding: 5px 0 5px 25px;
+            margin: 40px 0;
+            font-family: var(--font-heading);
+            font-size: clamp(22px, 3vw, 33px);
+            line-height: 1.35;
+        }
+
+        .about-statement span {
+            color: var(--purple-light);
+        }
+
+        .about-bottom {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #d2cddd;
+            font-size: 12px;
+        }
+
+        .about-bottom .symbol {
+            color: var(--purple-light);
+            font-size: 25px;
+        }
+
+        /* ========================================
+           SERVIÇOS
+        ======================================== */
+
+        .services {
+            background: var(--bg-secondary);
+            border-top: 1px solid rgba(255,255,255,.04);
+            border-bottom: 1px solid rgba(255,255,255,.04);
+        }
+
+        .services-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 40px;
+            margin-bottom: 65px;
+        }
+
+        .services-heading .section-description {
+            max-width: 350px;
+            margin-bottom: 5px;
+        }
+
+        .services-list {
+            border-top: 1px solid var(--border);
+        }
+
+        .service-item {
+            display: grid;
+            grid-template-columns: 70px 1fr 1fr 35px;
+            align-items: center;
+            gap: 25px;
+            padding: 30px 10px;
+            border-bottom: 1px solid var(--border);
+            transition: padding .35s, background .35s;
+        }
+
+        .service-item:hover {
+            padding-left: 22px;
+            padding-right: 22px;
+            background: rgba(146,60,255,.045);
+        }
+
+        .service-number {
+            color: var(--purple-light);
+            font-size: 12px;
+            font-family: var(--font-heading);
+        }
+
+        .service-item h3 {
+            font-family: var(--font-heading);
+            font-size: clamp(19px, 2.6vw, 28px);
+            font-weight: 500;
+            letter-spacing: -.8px;
+        }
+
+        .service-item p {
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.8;
+        }
+
+        .service-arrow {
+            font-size: 22px;
+            color: var(--purple-light);
+            transition: transform .3s;
+        }
+
+        .service-item:hover .service-arrow {
+            transform: translate(4px, -4px);
+        }
+
+        /* ========================================
+           PORTFÓLIO
+        ======================================== */
+
+        .portfolio-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .portfolio-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: #a8a3b2;
+            border: 1px solid var(--border);
+            padding: 10px 16px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: all .25s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            color: white;
+            background: var(--purple);
+            border-color: var(--purple);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 48px 25px;
+        }
+
+        .project-card {
+            min-width: 0;
+            animation: projectIn .45s ease both;
+        }
+
+        .project-card.hidden {
+            display: none;
+        }
+
+        .project-preview {
+            position: relative;
+            overflow: hidden;
+            background: #15131c;
+            border: 1px solid var(--border);
+            aspect-ratio: 1.42;
+        }
+
+        .project-art {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow: hidden;
+            padding: 25px;
+            transition: transform .6s cubic-bezier(.2,.7,.2,1);
+        }
+
+        .project-card:hover .project-art {
+            transform: scale(1.035);
+        }
+
+        .art-photography {
+            background:
+                linear-gradient(145deg, rgba(0,0,0,.05), rgba(0,0,0,.7)),
+                radial-gradient(ellipse at 65% 40%, #d6b49b 0%, #65534e 26%, #282329 52%, #111116 80%);
+        }
+
+        .art-burger {
+            background:
+                radial-gradient(ellipse at 55% 53%, #f5b94e 0%, #bd5c20 18%, transparent 19%),
+                radial-gradient(ellipse at 55% 48%, #56301c 0%, #2b1712 32%, transparent 33%),
+                linear-gradient(145deg, #361b15, #120d0c 75%);
+        }
+
+        .art-bakery {
+            background:
+                radial-gradient(ellipse at 65% 65%, #f5d5a1 0%, #ad7445 22%, transparent 23%),
+                radial-gradient(ellipse at 34% 30%, #d39b63 0%, #6e472f 25%, transparent 26%),
+                linear-gradient(125deg, #5b3726, #21150f 70%);
+        }
+
+        .art-barber {
+            background:
+                radial-gradient(ellipse at 60% 50%, rgba(193,157,103,.5), transparent 30%),
+                linear-gradient(120deg, #2d2925, #121212 65%);
+        }
+
+        .art-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.8);
+            position: relative;
+            z-index: 2;
+        }
+
+        .art-mockup {
+            position: absolute;
+            width: 72%;
+            height: 72%;
+            left: 14%;
+            top: 17%;
+            background: rgba(15,13,17,.8);
+            border: 1px solid rgba(255,255,255,.2);
+            box-shadow: 0 20px 70px rgba(0,0,0,.3);
+            transform: rotate(-4deg);
+            transition: transform .5s;
+            padding: 8px;
+        }
+
+        .project-card:hover .art-mockup {
+            transform: rotate(0) translateY(-5px);
+        }
+
+        .mockup-browser {
+            height: 12px;
+            border-bottom: 1px solid rgba(255,255,255,.1);
+            display: flex;
+            gap: 4px;
+            padding: 3px 4px;
+        }
+
+        .mockup-browser i {
+            width: 4px;
+            height: 4px;
+            background: #a6a0ae;
+            border-radius: 50%;
+        }
+
+        .mockup-content {
+            height: calc(100% - 12px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 7%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mockup-content::after {
+            content: "";
+            position: absolute;
+            width: 60%;
+            height: 130%;
+            right: -20%;
+            top: -15%;
+            background: rgba(183,123,255,.12);
+            transform: rotate(25deg);
+        }
+
+        .mockup-eyebrow {
+            font-size: clamp(5px, .7vw, 9px);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--purple-light);
+            margin-bottom: 7px;
+        }
+
+        .mockup-title {
+            font-family: var(--font-heading);
+            font-size: clamp(16px, 3vw, 38px);
+            line-height: 1.03;
+            letter-spacing: -1px;
+            max-width: 90%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .mockup-line {
+            width: 38%;
+            height: 3px;
+            background: var(--purple);
+            margin-top: 12px;
+        }
+
+        .preview-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(9,9,13,.75);
+            display: grid;
+            place-items: center;
+            opacity: 0;
+            transition: opacity .35s;
+            z-index: 5;
+        }
+
+        .project-card:hover .preview-overlay,
+        .project-card:focus-within .preview-overlay {
+            opacity: 1;
+        }
+
+        .preview-button {
+            border: 1px solid rgba(255,255,255,.65);
+            background: transparent;
+            color: white;
+            padding: 14px 18px;
+            font-size: 11px;
+            cursor: pointer;
+            transition: background .3s, border-color .3s;
+        }
+
+        .preview-button:hover {
+            background: var(--purple);
+            border-color: var(--purple);
+        }
+
+        .project-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            gap: 20px;
+            padding-top: 20px;
+        }
+
+        .project-info h3 {
+            font-family: var(--font-heading);
+            font-size: 23px;
+            font-weight: 500;
+            letter-spacing: -.7px;
+        }
+
+        .project-info p {
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 6px;
+        }
+
+        .project-tag {
+            color: var(--purple-light);
+            font-size: 10px;
+            border: 1px solid rgba(183,123,255,.25);
+            padding: 7px 10px;
+            white-space: nowrap;
+        }
+
+        .portfolio-note {
+            margin-top: 45px;
+            color: var(--muted);
+            font-size: 11px;
+            border-left: 2px solid var(--purple);
+            padding-left: 15px;
+        }
+
+        /* ========================================
+           PROCESSO
+        ======================================== */
+
+        .process {
+            background: var(--bg-secondary);
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: .8fr 1.2fr;
+            gap: 100px;
+        }
+
+        .process-intro {
+            position: sticky;
+            top: 130px;
+            align-self: start;
+        }
+
+        .process-steps {
+            border-top: 1px solid var(--border);
+        }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: 55px 1fr;
+            gap: 20px;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .step-number {
+            font-family: var(--font-heading);
+            color: var(--purple-light);
+            font-size: 13px;
+        }
+
+        .process-step h3 {
+            font-family: var(--font-heading);
+            font-size: 23px;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .process-step p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.9;
+            max-width: 420px;
+        }
+
+        /* ========================================
+           ORÇAMENTO
+        ======================================== */
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: .9fr 1.1fr;
+            gap: 100px;
+            align-items: start;
+        }
+
+        .contact-copy {
+            position: sticky;
+            top: 130px;
+        }
+
+        .contact-copy .section-title {
+            font-size: clamp(40px, 5.5vw, 70px);
+        }
+
+        .contact-copy > p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.9;
+            margin-top: 25px;
+        }
+
+        .contact-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 30px;
+            color: #d9d2e5;
+            font-size: 12px;
+            border-bottom: 1px solid #665776;
+            padding-bottom: 7px;
+        }
+
+        .contact-form {
+            border: 1px solid var(--border);
+            background: linear-gradient(145deg, rgba(255,255,255,.035), rgba(255,255,255,.008));
+            padding: 35px;
+        }
+
+        .form-heading {
+            font-family: var(--font-heading);
+            font-size: 23px;
+            font-weight: 500;
+            margin-bottom: 7px;
+        }
+
+        .form-subheading {
+            color: var(--muted);
+            font-size: 12px;
+            margin-bottom: 30px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px 16px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 9px;
+        }
+
+        .form-field.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-field label {
+            font-size: 11px;
+            color: #d2ccdd;
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            width: 100%;
+            min-height: 48px;
+            background: #0d0c12;
+            border: 1px solid #302b39;
+            color: white;
+            padding: 13px 14px;
+            font-size: 12px;
+            border-radius: 0;
+            outline: none;
+            transition: border-color .25s;
+        }
+
+        .form-field input::placeholder,
+        .form-field textarea::placeholder {
+            color: #6f687b;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            border-color: var(--purple);
+        }
+
+        .form-field select {
+            color-scheme: dark;
+            cursor: pointer;
+        }
+
+        .form-field textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            margin-top: 25px;
+        }
+
+        .form-privacy {
+            font-size: 10px;
+            color: #777180;
+            margin-top: 15px;
+            line-height: 1.7;
+        }
+
+        .form-status {
+            margin-top: 15px;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        .form-status:empty {
+            display: none;
+        }
+
+        /* ========================================
+           FOOTER
+        ======================================== */
+
+        .footer {
+            border-top: 1px solid var(--border);
+            padding: 35px 0;
+            background: #07070a;
+        }
+
+        .footer-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+            padding-bottom: 30px;
+        }
+
+        .footer-tagline {
+            color: var(--muted);
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-size: 11px;
+            color: #b4adbf;
+            transition: color .25s;
+        }
+
+        .footer-links a:hover {
+            color: var(--purple-light);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            border-top: 1px solid var(--border);
+            padding-top: 22px;
+            color: #777180;
+            font-size: 10px;
+        }
+
+        /* ========================================
+           ANIMAÇÕES
+        ======================================== */
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .hero-content > * {
+            animation: heroIn .8s both;
+        }
+
+        .hero-content > :nth-child(1) { animation-delay: .05s; }
+        .hero-content > :nth-child(2) { animation-delay: .15s; }
+        .hero-content > :nth-child(3) { animation-delay: .25s; }
+        .hero-content > :nth-child(4) { animation-delay: .35s; }
+        .hero-content > :nth-child(5) { animation-delay: .45s; }
+
+        .hero-visual {
+            animation: visualIn 1.2s .2s both;
+        }
+
+        @keyframes heroIn {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes visualIn {
+            from {
+                opacity: 0;
+                transform: translateX(25px) scale(.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0) scale(1);
+            }
+        }
+
+        @keyframes coreFloat {
+            0%, 100% { transform: translateY(0) rotate(-12deg); }
+            50% { transform: translateY(-12px) rotate(-6deg); }
+        }
+
+        @keyframes orbitPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.025); }
+        }
+
+        @keyframes linePulse {
+            0%, 100% { transform: scaleX(.6); opacity: .6; }
+            50% { transform: scaleX(1); opacity: 1; }
+        }
+
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        @keyframes projectIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========================================
+           RESPONSIVIDADE
+        ======================================== */
+
+        @media (min-width: 1500px) {
+            :root {
+                --container: 1300px;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .hero-grid {
+                grid-template-columns: 1fr  .8fr;
+                gap: 20px;
+            }
+
+            .hero h1 {
+                font-size: clamp(54px, 7vw, 76px);
+                letter-spacing: -3px;
+            }
+
+            .hero-visual {
+                min-height: 390px;
+            }
+
+            .about-grid,
+            .process-grid,
+            .contact-grid {
+                gap: 50px;
+            }
+
+            .service-item {
+                grid-template-columns: 40px 1fr 1fr 25px;
+                gap: 18px;
+            }
+
+            .services-heading {
+                align-items: start;
+                flex-direction: column;
+            }
+
+            .contact-form {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .section {
+                padding: 85px 0;
+            }
+
+            .header {
+                height: 72px;
+            }
+
+            .logo {
+                font-size: 25px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-cta {
+                display: none;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 72px;
+                left: 0;
+                right: 0;
+                padding: 20px 6% 25px;
+                background: rgba(9,9,13,.98);
+                border-bottom: 1px solid var(--border);
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links li a {
+                display: block;
+                padding: 15px 0;
+                border-bottom: 1px solid rgba(255,255,255,.06);
+                font-size: 13px;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 125px 0 90px;
+            }
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .hero h1 {
+                font-size: clamp(54px, 12vw, 82px);
+                letter-spacing: -3.5px;
+            }
+
+            .hero-description {
+                max-width: 480px;
+                font-size: 13px;
+            }
+
+            .hero-visual {
+                min-height: 360px;
+                margin-top: 15px;
+            }
+
+            .visual-orbit {
+                width: min(80%, 350px);
+            }
+
+            .visual-caption {
+                right: 0;
+                bottom: 0;
+            }
+
+            .hero-index {
+                display: none;
+            }
+
+            .scroll-indicator {
+                bottom: 25px;
+                right: 6%;
+            }
+
+            .about-grid,
+            .process-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .about-side,
+            .process-intro,
+            .contact-copy {
+                position: static;
+            }
+
+            .about-copy {
+                padding-top: 0;
+            }
+
+            .services-heading {
+                margin-bottom: 40px;
+            }
+
+            .service-item {
+                grid-template-columns: 32px 1fr 22px;
+                gap: 13px;
+                padding: 25px 0;
+            }
+
+            .service-item p {
+                grid-column: 2 / 3;
+                grid-row: 2;
+            }
+
+            .service-arrow {
+                grid-column: 3;
+                grid-row: 1;
+            }
+
+            .portfolio-heading {
+                align-items: start;
+                flex-direction: column;
+            }
+
+            .portfolio-grid {
+                gap: 35px 15px;
+            }
+
+            .project-art {
+                padding: 14px;
+            }
+
+            .project-info {
+                flex-direction: column;
+                gap: 10px;
+                padding-top: 14px;
+            }
+
+            .project-info h3 {
+                font-size: 19px;
+            }
+
+            .project-tag {
+                font-size: 9px;
+            }
+
+            .preview-overlay {
+                opacity: 1;
+                inset: auto 8px 8px;
+                display: flex;
+                justify-content: flex-end;
+                background: transparent;
+            }
+
+            .preview-button {
+                background: rgba(9,9,13,.9);
+                padding: 10px;
+                font-size: 10px;
+            }
+
+            .process-grid {
+                gap: 40px;
+            }
+
+            .contact-grid {
+                gap: 35px;
+            }
+
+            .footer-top {
+                align-items: start;
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 90%;
+            }
+
+            .section {
+                padding: 70px 0;
+            }
+
+            .section-title {
+                letter-spacing: -1.5px;
+            }
+
+            .hero {
+                padding-top: 115px;
+            }
+
+            .hero h1 {
+                font-size: clamp(48px, 12vw, 64px);
+                letter-spacing: -2.5px;
+            }
+
+            .availability {
+                font-size: 9px;
+                letter-spacing: .6px;
+                margin-bottom: 25px;
+            }
+
+            .hero-actions {
+                gap: 18px;
+            }
+
+            .button-primary {
+                min-height: 49px;
+                padding: 0 16px;
+                font-size: 11px;
+            }
+
+            .hero-visual {
+                min-height: 300px;
+            }
+
+            .visual-caption {
+                padding: 10px 13px;
+            }
+
+            .visual-caption strong {
+                font-size: 14px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .project-preview {
+                aspect-ratio: 1.35;
+            }
+
+            .project-art {
+                padding: 20px;
+            }
+
+            .mockup-title {
+                font-size: clamp(26px, 8vw, 36px);
+            }
+
+            .project-info {
+                flex-direction: row;
+                align-items: start;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-field.full {
+                grid-column: auto;
+            }
+
+            .contact-form {
+                padding: 22px 17px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .footer-links {
+                gap: 17px;
+            }
+
+            .scroll-indicator {
+                font-size: 8px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVEGAÇÃO -->
+
+    <header class="header" id="header">
+        <nav class="nav container" aria-label="Navegação principal">
+
+            <a href="#inicio" class="logo" aria-label="UPNEX Studio - Início">
+                UP<span>NEX</span>
+            </a>
+
+            <button
+                class="menu-toggle"
+                id="menuToggle"
+                aria-label="Abrir menu"
+                aria-expanded="false"
+                aria-controls="navLinks"
+            >
+                ☰
+            </button>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Estúdio</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#portfolio">Projetos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+
+            <a href="#contato" class="nav-cta">Solicitar orçamento ↗</a>
+
+        </nav>
+    </header>
+
+
+    <main>
+
+        <!-- HERO -->
+
+        <section class="hero" id="inicio">
+
+            <div class="container hero-grid">
+
+                <div class="hero-content">
+
+                    <div class="availability">
+                        <span class="availability-dot"></span>
+                        UPNEX STUDIO · DESENVOLVIMENTO DIGITAL
+                    </div>
+
+                    <h1>
+                        Sua marca.
+                        <span class="gradient-text">Outro nível.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        Criamos experiências digitais que transformam a maneira
+                        como as marcas se apresentam, conquistam clientes e
+                        ocupam seu espaço no mercado.
+                    </p>
+
+                    <div class="hero-actions">
+
+                        <a href="#portfolio" class="button-primary">
+                            Explorar projetos
+                            <span class="arrow">↗</span>
+                        </a>
+
+                        <a href="#sobre" class="text-link">
+                            Conheça o estúdio
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <div class="hero-visual" aria-label="Composição visual abstrata da UPNEX">
+
+                    <div class="visual-orbit">
+
+                        <span class="orbit-point one"></span>
+                        <span class="orbit-point two"></span>
+                        <span class="orbit-point three"></span>
+
+                        <div class="visual-core">
+                            <span>U.</span>
+                        </div>
+
+                    </div>
+
+                    <div class="visual-caption">
+                        <small>Digital experiences</small>
+                        <strong>Designed to elevate.</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="hero-index">UPNEX® — CREATIVE DIGITAL STUDIO</div>
+
+            <a href="#sobre" class="scroll-indicator">
+                Explore a experiência
+                <span class="scroll-line"></span>
+            </a>
+
+        </section>
+
+
+        <!-- FAIXA ANIMADA -->
+
+        <div class="marquee" aria-label="Especialidades UPNEX">
+
+            <div class="marquee-track" aria-hidden="true">
+
+                <div class="marquee-item">
+                    Desenvolvimento web <span>✳</span>
+                    Design estratégico <span>✳</span>
+                    Experiências digitais <span>✳</span>
+                    Identidade digital <span>✳</span>
+                </div>
+
+                <div class="marquee-item">
+                    Desenvolvimento web <span>✳</span>
+                    Design estratégico <span>✳</span>
+                    Experiências digitais <span>✳</span>
+                    Identidade digital <span>✳</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SOBRE O ESTÚDIO -->
+
+        <section class="section" id="sobre">
+
+            <div class="container about-grid">
+
+                <div class="about-side reveal">
+
+                    <div class="section-label">01 — O estúdio</div>
+
+                    <h2 class="section-title">
+                        Não é só um site.
+                        <span class="gradient-text">É percepção.</span>
+                    </h2>
+
+                </div>
+
+
+                <div class="about-copy reveal">
+
+                    <p>
+                        A UPNEX desenvolve experiências digitais para empresas
+                        que desejam apresentar seu trabalho com mais
+                        personalidade, profissionalismo e intenção.
+                    </p>
+
+                    <p>
+                        Unimos design, tecnologia e estratégia para construir
+                        sites alinhados à identidade de cada negócio.
+                        Cada projeto começa entendendo a marca e o que ela
+                        precisa comunicar.
+                    </p>
+
+                    <div class="about-statement">
+                        O digital é a primeira impressão de muitas marcas.
+                        <span>Ela precisa ser memorável.</span>
+                    </div>
+
+                    <div class="about-bottom">
+                        <span class="symbol">↗</span>
+                        <span>Design autoral. Desenvolvimento sob medida.</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SERVIÇOS -->
+
+        <section class="section services" id="servicos">
+
+            <div class="container">
+
+                <div class="services-heading reveal">
+
+                    <div>
+                        <div class="section-label">02 — O que fazemos</div>
+
+                        <h2 class="section-title">
+                            Tecnologia com
+                            <span class="gradient-text">intenção.</span>
+                        </h2>
+                    </div>
+
+                    <p class="section-description">
+                        Soluções digitais pensadas para valorizar sua marca,
+                        apresentar seus serviços e facilitar o contato com
+                        seus clientes.
+                    </p>
+
+                </div>
+
+
+                <div class="services-list">
+
+                    <article class="service-item reveal">
+                        <span class="service-number">01</span>
+                        <h3>Sites institucionais</h3>
+                        <p>
+                            Presença digital profissional para empresas
+                            que precisam transmitir confiança e credibilidade.
+                        </p>
+                        <span class="service-arrow">↗</span>
+                    </article>
+
+                    <article class="service-item reveal">
+                        <span class="service-number">02</span>
+                        <h3>Landing pages</h3>
+                        <p>
+                            Páginas estratégicas para apresentar ofertas,
+                            divulgar serviços e incentivar contatos.
+                        </p>
+                        <span class="service-arrow">↗</span>
+                    </article>
+
+                    <article class="service-item reveal">
+                        <span class="service-number">03</span>
+                        <h3>Portfólios digitais</h3>
+                        <p>
+                            Experiências visuais para fotógrafos,
+                            criativos e profissionais que precisam
+                            valorizar seus trabalhos.
+                        </p>
+                        <span class="service-arrow">↗</span>
+                    </article>
+
+                    <article class="service-item reveal">
+                        <span class="service-number">04</span>
+                        <h3>Sites comerciais</h3>
+                        <p>
+                            Apresentação de produtos, cardápios,
+                            serviços e informações comerciais.
+                        </p>
+                        <span class="service-arrow">↗</span>
+                    </article>
+
+                    <article class="service-item reveal">
+                        <span class="service-number">05</span>
+                        <h3>Manutenção digital</h3>
+                        <p>
+                            Atualizações, melhorias e suporte para
+                            manter o site alinhado às necessidades
+                            do negócio, conforme o plano contratado.
+                        </p>
+                        <span class="service-arrow">↗</span>
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- PORTFÓLIO -->
+
+        <section class="section" id="portfolio">
+
+            <div class="container">
+
+                <div class="portfolio-heading reveal">
+
+                    <div>
+                        <div class="section-label">03 — Portfólio</div>
+
+                        <h2 class="section-title">
+                            Projetos que
+                            <span class="gradient-text">ganham forma.</span>
+                        </h2>
+                    </div>
+
+                </div>
+
+
+                <p class="section-description reveal" style="margin-top:-15px; margin-bottom:35px;">
+                    Explore conceitos visuais desenvolvidos para diferentes
+                    segmentos. As prévias abaixo são demonstrações conceituais,
+                    não sites publicados de clientes.
+                </p>
+
+
+                <div class="portfolio-filters reveal" role="group" aria-label="Filtrar projetos">
+
+                    <button class="filter-btn active" data-filter="todos" aria-pressed="true">
+                        Todos
+                    </button>
+
+                    <button class="filter-btn" data-filter="fotografia" aria-pressed="false">
+                        Fotografia
+                    </button>
+
+                    <button class="filter-btn" data-filter="gastronomia" aria-pressed="false">
+                        Gastronomia
+                    </button>
+
+                    <button class="filter-btn" data-filter="barbearia" aria-pressed="false">
+                        Barbearia
+                    </button>
+
+                </div>
+
+
+                <div class="portfolio-grid" id="portfolioGrid">
+
+                    <!-- PROJETO 1 -->
+
+                    <article class="project-card reveal" data-category="fotografia">
+
+                        <div class="project-preview">
+
+                            <div class="project-art art-photography">
+
+                                <div class="art-label">
+                                    <span>Visual stories</span>
+                                    <span>Concept 01</span>
+                                </div>
+
+                                <div class="art-mockup">
+
+                                    <div class="mockup-browser">
+                                        <i></i><i></i><i></i>
+                                    </div>
+
+                                    <div class="mockup-content">
+                                        <span class="mockup-eyebrow">Photography studio</span>
+                                        <h3 class="mockup-title">Frames of life.</h3>
+                                        <div class="mockup-line"></div>
+                                    </div>
+
+                                </div>
+
+                                <div class="art-label">
+                                    <span>Portfolio concept</span>
+                                    <span>UPNEX®</span>
+                                </div>
+
+                            </div>
+
+                            <div class="preview-overlay">
+                                <button class="preview-button" data-preview="fotografia">
+                                    Explorar conceito ↗
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div class="project-info">
+
+                            <div>
+                                <h3>Frames Studio</h3>
+                                <p>Portfólio de fotografia · Conceito visual</p>
+                            </div>
+
+                            <span class="project-tag">Fotografia</span>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- PROJETO 2 -->
+
+                    <article class="project-card reveal" data-category="gastronomia">
+
+                        <div class="project-preview">
+
+                            <div class="project-art art-burger">
+
+                                <div class="art-label">
+                                    <span>Crafted taste</span>
+                                    <span>Concept 02</span>
+                                </div>
+
+                                <div class="art-mockup">
+
+                                    <div class="mockup-browser">
+                                        <i></i><i></i><i></i>
+                                    </div>
+
+                                    <div class="mockup-content">
+                                        <span class="mockup-eyebrow">Premium burger house</span>
+                                        <h3 class="mockup-title">Beyond the burger.</h3>
+                                        <div class="mockup-line"></div>
+                                    </div>
+
+                                </div>
+
+                                <div class="art-label">
+                                    <span>Restaurant concept</span>
+                                    <span>UPNEX®</span>
+                                </div>
+
+                            </div>
+
+                            <div class="preview-overlay">
+                                <button class="preview-button" data-preview="gastronomia">
+                                    Explorar conceito ↗
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div class="project-info">
+
+                            <div>
+                                <h3>Blackstone Burger</h3>
+                                <p>Site gastronômico · Conceito visual</p>
+                            </div>
+
+                            <span class="project-tag">Gastronomia</span>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- PROJETO 3 -->
+
+                    <article class="project-card reveal" data-category="gastronomia">
+
+                        <div class="project-preview">
+
+                            <div class="project-art art-bakery">
+
+                                <div class="art-label">
+                                    <span>Artisan bakery</span>
+                                    <span>Concept 03</span>
+                                </div>
+
+                                <div class="art-mockup">
+
+                                    <div class="mockup-browser">
+                                        <i></i><i></i><i></i>
+                                    </div>
+
+                                    <div class="mockup-content">
+                                        <span class="mockup-eyebrow">Bakery & patisserie</span>
+                                        <h3 class="mockup-title">The art of slow mornings.</h3>
+                                        <div class="mockup-line"></div>
+                                    </div>
+
+                                </div>
+
+                                <div class="art-label">
+                                    <span>Bakery concept</span>
+                                    <span>UPNEX®</span>
+                                </div>
+
+                            </div>
+
+                            <div class="preview-overlay">
+                                <button class="preview-button" data-preview="padaria">
+                                    Explorar conceito ↗
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div class="project-info">
+
+                            <div>
+                                <h3>Maison du Pain</h3>
+                                <p>Padaria artesanal · Conceito visual</p>
+                            </div>
+
+                            <span class="project-tag">Gastronomia</span>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- PROJETO 4 -->
+
+                    <article class="project-card reveal" data-category="barbearia">
+
+                        <div class="project-preview">
+
+                            <div class="project-art art-barber">
+
+                                <div class="art-label">
+                                    <span>Classic grooming</span>
+                                    <span>Concept 04</span>
+                                </div>
+
+                                <div class="art-mockup">
+
+                                    <div class="mockup-browser">
+                                        <i></i><i></i><i></i>
+                                    </div>
+
+                                    <div class="mockup-content">
+                                        <span class="mockup-eyebrow">Barber club</span>
+                                        <h3 class="mockup-title">Tradition. Refined.</h3>
+                                        <div class="mockup-line"></div>
+                                    </div>
+
+                                </div>
+
+                                <div class="art-label">
+                                    <span>Barbershop concept</span>
+                                    <span>UPNEX®</span>
+                                </div>
+
+                            </div>
+
+                            <div class="preview-overlay">
+                                <button class="preview-button" data-preview="barbearia">
+                                    Explorar conceito ↗
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div class="project-info">
+
+                            <div>
+                                <h3>Atelier Barber</h3>
+                                <p>Barbearia premium · Conceito visual</p>
+                            </div>
+
+                            <span class="project-tag">Barbearia</span>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <p class="portfolio-note">
+                    Os projetos apresentados são estudos demonstrativos
+                    criados para ilustrar possibilidades de design.
+                    Não representam clientes reais nem serviços já entregues.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROCESSO -->
+
+        <section class="section process" id="processo">
+
+            <div class="container process-grid">
+
+                <div class="process-intro reveal">
+
+                    <div class="section-label">04 — Nosso processo</div>
+
+                    <h2 class="section-title">
+                        Do conceito
+                        <span class="gradient-text">à presença.</span>
+                    </h2>
+
+                    <p class="section-description">
+                        Um processo organizado para transformar ideias em
+                        experiências digitais alinhadas aos objetivos
+                        de cada negócio.
+                    </p>
+
+                </div>
+
+
+                <div class="process-steps">
+
+                    <article class="process-step reveal">
+                        <span class="step-number">01</span>
+                        <div>
+                            <h3>Descoberta</h3>
+                            <p>
+                                Entendemos sua empresa, seu público,
+                                suas necessidades e o que você deseja
+                                alcançar com o projeto.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="process-step reveal">
+                        <span class="step-number">02</span>
+                        <div>
+                            <h3>Direção criativa</h3>
+                            <p>
+                                Definimos a estrutura, a identidade visual
+                                e a experiência que melhor representam
+                                seu negócio.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="process-step reveal">
+                        <span class="step-number">03</span>
+                        <div>
+                            <h3>Desenvolvimento</h3>
+                            <p>
+                                Construímos o site com atenção à navegação,
+                                à responsividade e ao funcionamento
+                                dos componentes.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="process-step reveal">
+                        <span class="step-number">04</span>
+                        <div>
+                            <h3>Entrega</h3>
+                            <p>
+                                Após os testes e os ajustes previstos
+                                no projeto, preparamos o site para
+                                publicação conforme o escopo contratado.
+                            </p>
+                        </div>
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTATO / ORÇAMENTO -->
+
+        <section class="section" id="contato">
+
+            <div class="container contact-grid">
+
+                <div class="contact-copy reveal">
+
+                    <div class="section-label">05 — Vamos conversar</div>
+
+                    <h2 class="section-title">
+                        Sua próxima
+                        <span class="gradient-text">grande ideia.</span>
+                    </h2>
+
+                    <p>
+                        Conte um pouco sobre seu negócio e o site que
+                        você deseja desenvolver. Vamos organizar as
+                        informações para iniciar uma conversa sobre
+                        seu projeto.
+                    </p>
+
+                    <!--
+                      SUBSTITUA O NÚMERO DO WHATSAPP NO JAVASCRIPT
+                      PELO NÚMERO OFICIAL DA UPNEX.
+                    -->
+
+                    <a href="#contato" class="contact-whatsapp" id="whatsappLink">
+                        <span>↗</span>
+                        Prefere conversar pelo WhatsApp?
+                    </a>
+
+                </div>
+
+
+                <form class="contact-form reveal" id="budgetForm">
+
+                    <h3 class="form-heading">Solicite seu orçamento.</h3>
+
+                    <p class="form-subheading">
+                        Preencha os dados para preparar sua solicitação.
+                    </p>
+
+                    <div class="form-grid">
+
+                        <div class="form-field">
+                            <label for="name">Nome completo *</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Como podemos chamar você?"
+                                autocomplete="name"
+                                required
+                                maxlength="100"
+                            >
+                        </div>
+
+                        <div class="form-field">
+                            <label for="company">Nome da empresa</label>
+                            <input
+                                type="text"
+                                id="company"
+                                name="company"
+                                placeholder="Nome do seu negócio"
+                                autocomplete="organization"
+                                maxlength="100"
+                            >
+                        </div>
+
+                        <div class="form-field">
+                            <label for="email">E-mail *</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="voce@empresa.com"
+                                autocomplete="email"
+                                required
+                                maxlength="150"
+                            >
+                        </div>
+
+                        <div class="form-field">
+                            <label for="phone">WhatsApp *</label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="(00) 00000-0000"
+                                autocomplete="tel"
+                                required
+                                maxlength="20"
+                            >
+                        </div>
+
+                        <div class="form-field full">
+                            <label for="type">Qual tipo de site você precisa? *</label>
+                            <select id="type" name="type" required>
+                                <option value="" disabled selected>Selecione uma opção</option>
+                                <option value="Site institucional">Site institucional</option>
+                                <option value="Landing page">Landing page</option>
+                                <option value="Portfólio">Portfólio profissional</option>
+                                <option value="Site para restaurante ou padaria">Site para restaurante ou padaria</option>
+                                <option value="Site para barbearia">Site para barbearia</option>
+                                <option value="Loja virtual">Loja virtual</option>
+                                <option value="Outro projeto">Outro projeto</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field full">
+                            <label for="budget">Orçamento previsto</label>
+                            <select id="budget" name="budget">
+                                <option value="Ainda não definido">Ainda não definido</option>
+                                <option value="Até R$ 500">Até R$ 500</option>
+                                <option value="R$ 500 a R$ 1.500">R$ 500 a R$ 1.500</option>
+                                <option value="R$ 1.500 a R$ 3.000">R$ 1.500 a R$ 3.000</option>
+                                <option value="Acima de R$ 3.000">Acima de R$ 3.000</option>
+                            </select>
+                        </div>
+
+                        <div class="form-field full">
+                            <label for="details">Conte sobre seu projeto *</label>
+                            <textarea
+                                id="details"
+                                name="details"
+                                placeholder="O que sua empresa faz? O que você gostaria de ter no site?"
+                                required
+                                minlength="10"
+                                maxlength="2000"
+                            ></textarea>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" class="button-primary form-submit">
+                        Preparar solicitação
+                        <span class="arrow">↗</span>
+                    </button>
+
+                    <p class="form-privacy">
+                        Ao enviar, os dados serão preparados para compartilhamento
+                        pelo WhatsApp. Nenhuma informação será armazenada por
+                        este formulário.
+                    </p>
+
+                    <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+
+    <footer class="footer">
+
+        <div class="container">
+
+            <div class="footer-top">
+
+                <div>
+                    <a href="#inicio" class="logo">UP<span>NEX</span></a>
+
+                    <p class="footer-tagline">
+                        Experiências digitais criadas para elevar marcas.
+                    </p>
+                </div>
+
+                <nav class="footer-links" aria-label="Links do rodapé">
+                    <a href="#sobre">Estúdio</a>
+                    <a href="#servicos">Serviços</a>
+                    <a href="#portfolio">Projetos</a>
+                    <a href="#contato">Orçamento</a>
+                </nav>
+
+            </div>
+
+            <div class="footer-bottom">
+                <span>© <span id="year"></span> UPNEX Studio.</span>
+                <span>Design & desenvolvimento digital.</span>
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <script>
+        /* ========================================
+           CONFIGURAÇÃO
+        ======================================== */
+
+        /*
+         * IMPORTANTE:
+         * Substitua pelo número oficial da UPNEX.
+         * Use o código do país + DDD + número.
+         * Exemplo de formato: 5511999999999
+         */
+
+        const UPNEX_WHATSAPP = "5512992493129";
+
+        /* Supabase (chave pública: só permite inserir contatos) */
+        const SUPABASE_URL = "https://nazjcykovdxqxzhsiyrh.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_S6iBeZLYgjFBdnV9G2Z8_A_5xMSdUTx";
+
+        function saveContact(data) {
+            return fetch(SUPABASE_URL + "/rest/v1/contatos", {
+                method: "POST",
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Content-Type": "application/json",
+                    "Prefer": "return=minimal"
+                },
+                body: JSON.stringify(data),
+                keepalive: true
+            }).then(response => response.ok).catch(() => false);
+        }
+
+        /* HEADER AO ROLAR */
+
+        const header = document.getElementById("header");
+
+        function updateHeader() {
+            header.classList.toggle("scrolled", window.scrollY > 30);
+        }
+
+        window.addEventListener("scroll", updateHeader, { passive: true });
+
+        updateHeader();
+
+
+        /* MENU MOBILE */
+
+        const menuToggle = document.getElementById("menuToggle");
+        const navLinks = document.getElementById("navLinks");
+
+        menuToggle.addEventListener("click", () => {
+            const isOpen = navLinks.classList.toggle("open");
+
+            menuToggle.setAttribute("aria-expanded", String(isOpen));
+            menuToggle.setAttribute(
+                "aria-label",
+                isOpen ? "Fechar menu" : "Abrir menu"
+            );
+
+            menuToggle.textContent = isOpen ? "✕" : "☰";
+        });
+
+        navLinks.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("open");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.setAttribute("aria-label", "Abrir menu");
+                menuToggle.textContent = "☰";
+            });
+        });
+
+        document.addEventListener("keydown", event => {
+            if (event.key === "Escape") {
+                navLinks.classList.remove("open");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.setAttribute("aria-label", "Abrir menu");
+                menuToggle.textContent = "☰";
+            }
+        });
+
+
+        /* REVELAÇÃO DURANTE A ROLAGEM */
+
+        const revealElements = document.querySelectorAll(".reveal");
+
+        const prefersReducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        if ("IntersectionObserver" in window && !prefersReducedMotion) {
+
+            const revealObserver = new IntersectionObserver(
+                (entries, observer) => {
+
+                    entries.forEach(entry => {
+
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("visible");
+                            observer.unobserve(entry.target);
+                        }
+
+                    });
+
+                },
+                {
+                    threshold: 0.12,
+                    rootMargin: "0px 0px -35px 0px"
+                }
+            );
+
+            revealElements.forEach(element => {
+                revealObserver.observe(element);
+            });
+
+        } else {
+
+            revealElements.forEach(element => {
+                element.classList.add("visible");
+            });
+
+        }
+
+
+        /* FILTROS DO PORTFÓLIO */
+
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const projectCards = document.querySelectorAll(".project-card");
+
+        filterButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const selectedFilter = button.dataset.filter;
+
+                filterButtons.forEach(item => {
+
+                    const active = item === button;
+
+                    item.classList.toggle("active", active);
+                    item.setAttribute("aria-pressed", String(active));
+
+                });
+
+                projectCards.forEach(card => {
+
+                    const category = card.dataset.category;
+
+                    const shouldShow =
+                        selectedFilter === "todos" ||
+                        category === selectedFilter;
+
+                    card.classList.toggle("hidden", !shouldShow);
+
+                    if (shouldShow) {
+                        card.style.animation = "none";
+
+                        requestAnimationFrame(() => {
+                            card.style.animation = "";
+                        });
+                    }
+
+                });
+
+            });
+
+        });
+
+
+        /* PRÉVIAS CONCEITUAIS */
+
+        const previewButtons = document.querySelectorAll("[data-preview]");
+
+        const previewDescriptions = {
+
+            fotografia: {
+                title: "Frames Studio",
+                text: "Conceito de portfólio para fotografia, com foco na apresentação visual de imagens, identidade e trabalhos selecionados."
+            },
+
+            gastronomia: {
+                title: "Blackstone Burger",
+                text: "Conceito de site gastronômico para apresentar uma marca, destacar produtos e facilitar o acesso às informações comerciais."
+            },
+
+            padaria: {
+                title: "Maison du Pain",
+                text: "Conceito de site para padaria artesanal, com direção visual acolhedora e apresentação de produtos."
+            },
+
+            barbearia: {
+                title: "Atelier Barber",
+                text: "Conceito de presença digital para barbearia, com linguagem visual sofisticada e espaço para apresentar serviços."
+            }
+
+        };
+
+        previewButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                const project = previewDescriptions[button.dataset.preview];
+
+                if (!project) return;
+
+                alert(
+                    project.title + "\n\n" +
+                    project.text + "\n\n" +
+                    "Esta é uma prévia conceitual dentro do portfólio UPNEX. " +
+                    "Ela ainda não corresponde a um site independente publicado."
+                );
+
+            });
+
+        });
+
+
+        /* WHATSAPP */
+
+        const whatsappLink = document.getElementById("whatsappLink");
+
+        function openWhatsApp(message) {
+
+            const phone = UPNEX_WHATSAPP.replace(/\D/g, "");
+
+            if (!phone) {
+
+                const status = document.getElementById("formStatus");
+
+                status.textContent =
+                    "O WhatsApp ainda não foi configurado. " +
+                    "Adicione o número oficial da UPNEX na variável " +
+                    "UPNEX_WHATSAPP, no final deste arquivo.";
+
+                status.style.color = "#ffbf80";
+
+                return false;
+            }
+
+            const url =
+                "https://wa.me/" +
+                phone +
+                "?text=" +
+                encodeURIComponent(message);
+
+            window.open(url, "_blank", "noopener,noreferrer");
+
+            return true;
+        }
+
+        whatsappLink.addEventListener("click", event => {
+
+            event.preventDefault();
+
+            openWhatsApp(
+                "Olá! Conheci a UPNEX Studio pelo site e gostaria de conversar sobre um projeto."
+            );
+
+        });
+
+
+        /* FORMULÁRIO DE ORÇAMENTO */
+
+        const budgetForm = document.getElementById("budgetForm");
+        const formStatus = document.getElementById("formStatus");
+
+        budgetForm.addEventListener("submit", async event => {
+
+            event.preventDefault();
+
+            formStatus.textContent = "";
+            formStatus.style.color = "";
+
+            if (!budgetForm.checkValidity()) {
+                budgetForm.reportValidity();
+                return;
+            }
+
+            const formData = new FormData(budgetForm);
+
+            const name = String(formData.get("name") || "").trim();
+            const company = String(formData.get("company") || "").trim();
+            const email = String(formData.get("email") || "").trim();
+            const phone = String(formData.get("phone") || "").trim();
+            const type = String(formData.get("type") || "").trim();
+            const budget = String(formData.get("budget") || "").trim();
+            const details = String(formData.get("details") || "").trim();
+
+            if (details.length < 10) {
+
+                formStatus.textContent =
+                    "Descreva seu projeto com pelo menos 10 caracteres.";
+
+                formStatus.style.color = "#ffbf80";
+
+                return;
+            }
+
+            const message = [
+                "Olá, UPNEX Studio! Gostaria de solicitar um orçamento.",
+                "",
+                "NOME: " + name,
+                "EMPRESA: " + (company || "Não informado"),
+                "E-MAIL: " + email,
+                "WHATSAPP DO CLIENTE: " + phone,
+                "TIPO DE SITE: " + type,
+                "ORÇAMENTO PREVISTO: " + budget,
+                "",
+                "SOBRE O PROJETO:",
+                details
+            ].join("\n");
+
+            const phoneDigits = UPNEX_WHATSAPP.replace(/\D/g, "");
+
+            if (!phoneDigits) {
+                formStatus.textContent = "O WhatsApp ainda não foi configurado.";
+                formStatus.style.color = "#ffbf80";
+                return;
+            }
+
+            const submitButton = budgetForm.querySelector("button[type=submit]");
+            submitButton.disabled = true;
+
+            formStatus.textContent = "Salvando sua solicitação...";
+            formStatus.style.color = "#c8a4ff";
+
+            /* abre a aba já no clique, para o celular não bloquear */
+            const waWindow = window.open("", "_blank");
+
+            const timeout = new Promise(resolve => setTimeout(() => resolve(false), 6000));
+
+            const saved = await Promise.race([
+                saveContact({
+                    nome: name,
+                    empresa: company || null,
+                    email: email,
+                    whatsapp: phone,
+                    tipo_site: type,
+                    orcamento: budget || null,
+                    detalhes: details
+                }),
+                timeout
+            ]);
+
+            const waUrl =
+                "https://wa.me/" + phoneDigits +
+                "?text=" + encodeURIComponent(message);
+
+            if (waWindow) {
+                waWindow.location.href = waUrl;
+            } else {
+                window.location.href = waUrl;
+            }
+
+            submitButton.disabled = false;
+
+            formStatus.textContent = saved
+                ? "Solicitação registrada! Confira os dados na conversa do WhatsApp e envie a mensagem para concluir."
+                : "Não foi possível registrar no sistema, mas o WhatsApp foi aberto. Envie a mensagem para concluir.";
+
+            formStatus.style.color = saved ? "#c8a4ff" : "#ffbf80";
+
+        });
+
+
+        /* ANO AUTOMÁTICO */
+
+        document.getElementById("year").textContent =
+            new Date().getFullYear();
+
+    </script>
+
+</body>
+</html>
